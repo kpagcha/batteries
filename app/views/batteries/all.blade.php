@@ -1,9 +1,5 @@
 @if(isset($batteries))
-	<div style="padding:2em">
-		<div class="col-md-8 col-md-offset-4">
-			<button type="button" class="btn btn-default">Add new battery</button>
-		</div>
-	</div>
+	@include('batteries.create')
 	<table class="table table-striped table-responsive" style="margin-top:4em">
 		<thead>
 			<tr>

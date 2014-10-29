@@ -38,5 +38,6 @@
 	</div>
 	{{ HTML::script('js/bootstrap.js') }}
 	{{ HTML::script('js/batteries.js') }}
+	{{ HTML::script('js/home.js') }}
 </body>
 </html>
