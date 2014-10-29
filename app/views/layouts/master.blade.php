@@ -31,8 +31,9 @@
 		</nav>
 	</div>
 	<div class="container">
-		@yield("content")
-		<div id="content" class="col-md-12"></div>
+		<div id="content" class="col-md-12">
+			@yield("content")
+		</div>
 	</div>
 	{{ HTML::script('js/bootstrap.js') }}
 	{{ HTML::script('js/batteries.js') }}

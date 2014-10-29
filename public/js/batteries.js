@@ -5,11 +5,11 @@ $('#home').addClass('active');
 
 /* --------------------------------------------------------------------------------------------------------------------/*
 
-/* "Working" functions */
+/* "Working" functions or those with bussiness logic */
+
 function renderBatteries(url) {
 	if (url === undefined || url === null) url = '/battery/all';
 	$.get(url, function(data) {
-			alert(data['empty'])
 			$('#content').empty();
 			if (data['empty'] == false) {
 				$('#content').append(data['view']);
@@ -25,5 +25,7 @@ function renderBatteries(url) {
 
 $(document).on('click', '#manage-batteries', function (event) {
     event.preventDefault();
+    $('#home').removeClass('active');
+    $('#manage-batteries').addClass('active');
     renderBatteries();
 });
