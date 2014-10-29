@@ -9,6 +9,7 @@
 				<th>Capacity</th>
 				<th>Height</th>
 				<th>Diameter</th>
+				<th colspan="2"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,6 +51,18 @@
 						@else
 							-
 						@endif
+					</td>
+					<td>
+						{{ Form::open(['class' => 'pull-right']) }}
+							<span class="glyphicon glyphicon-pencil btn btn-xs btn-success"></span>
+							{{ Form::hidden('edit-id', $battery->id) }}
+						{{ Form::close() }}
+					</td>
+					<td>
+						{{ Form::open(['class' => 'pull-right']) }}
+							<span class="glyphicon glyphicon-remove btn btn-xs btn-danger"></span>
+							{{ Form::hidden('id', $battery->id) }}
+						{{ Form::close() }}
 					</td>
 				</tr>
 			@endforeach
