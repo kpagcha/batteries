@@ -6,6 +6,7 @@
 	{{ HTML::style('css/bootstrap.css') }}
 	{{ HTML::style('css/batteries-app.css') }}
 	{{ HTML::script('js/jquery.js') }}
+	{{ HTML::script('js/jquery-ui.js') }}
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -19,11 +20,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="{{ URL::to('/') }}" class="navbar-brand">Batteries App</a>
+					<a href="#" id="home-brand" class="navbar-brand">Batteries App</a>
 				</div>
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li id="home"><a href="{{ URL::to('/') }}">Home</a></li>
+						<li id="home"><a href="#">Home</a></li>
 						<li id="manage-batteries"><a href="#">Manage batteries</a></li>
 					</ul>
 				</div>

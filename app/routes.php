@@ -17,4 +17,5 @@ Route::get('/', function() {
 
 Route::group(['before' => 'ajax'], function() {
 	Route::get('/battery/all', ['as' => 'battery.all', 'uses' => 'BatteryController@all']);
+	Route::get('/home/main', ['as' => 'home.main', 'uses' => 'HomeController@main']);
 });
