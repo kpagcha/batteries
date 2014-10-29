@@ -88,3 +88,10 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/* Only ajax requests allowed */
+Route::filter('ajax', function() {
+	if (!Request::ajax()) {
+		return Redirect::to('/');
+	}
+});

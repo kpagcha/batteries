@@ -18,7 +18,7 @@ class CreateBatteriesTable extends Migration {
 			$table->string('name');
 			$table->string('category');
 			$table->string('technology')->nullable();
-			$table->float('voltaje')->nullable();
+			$table->float('voltage')->nullable();
 			$table->integer('capacity')->nullable();
 			$table->float('height')->nullable();
 			$table->float('diameter')->nullable();

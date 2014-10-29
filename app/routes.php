@@ -14,3 +14,7 @@
 Route::get('/', function() {
 	return View::make('home.index');
 });
+
+Route::group(['before' => 'ajax'], function() {
+	Route::get('/battery/all', ['as' => 'battery.all', 'uses' => 'BatteryController@all']);
+});
