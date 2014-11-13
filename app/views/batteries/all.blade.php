@@ -1,5 +1,7 @@
 @if(isset($batteries))
-	@include('batteries.create')
+	{{ Form::open(['id' => 'create-battery-form']) }}
+		@include('batteries.create')
+	{{ Form::close() }}
 	<table class="table table-striped table-responsive" style="margin-top:4em">
 		<thead>
 			<tr>
