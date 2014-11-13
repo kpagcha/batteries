@@ -1,8 +1,9 @@
-@if(isset($batteries))
-	{{ Form::open(['id' => 'create-battery-form']) }}
-		@include('batteries.create')
-	{{ Form::close() }}
-	<table class="table table-striped table-responsive" style="margin-top:4em">
+{{ Form::open(['id' => 'create-battery-form']) }}
+	@include('batteries.create')
+{{ Form::close() }}
+
+<div class="col-md-12" id="batteries-list">
+	<table class="table table-responsive" style="margin-top:4em">
 		<thead>
 			<tr>
 				<th>Price</th>
@@ -75,4 +76,4 @@
 		</tbody>
 	</table>
 	{{ $batteries->links() }}
-@endif
+</div>

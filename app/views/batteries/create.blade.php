@@ -1,6 +1,6 @@
 <div style="padding:2em">
 	<div id="success" class="alert alert-success hidden"></div>
-	<div class="col-md-8 col-md-offset-4">
+	<div class="col-md-6 col-md-offset-5">
 		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#add-new-battery">Add new battery</button>
 	</div>
 	<div class="modal fade" id="add-new-battery" tabindex="-1" role="dialog" aria-labelledby="add-new-battery-label" aria-hidden="true">

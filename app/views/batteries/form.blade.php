@@ -43,7 +43,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<div class="form-group">
-			{{ Form::label('diameter', 'Category', ['class' => 'control-label']) }}
+			{{ Form::label('diameter', 'Diameter', ['class' => 'control-label']) }}
 			{{ Form::text('diameter', null, ['class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Diameter of the battery in mm', 'id' => 'input-diameter']) }}
 		</div>
 	</div>

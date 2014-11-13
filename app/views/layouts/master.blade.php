@@ -10,7 +10,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<div class="container-fluid">
+	<!-- <div class="container-fluid"> -->
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 		</nav>
-	</div>
+	<!-- </div> -->
 	<div class="container">
 		<div id="content" class="col-md-12">
 			@yield("content")
