@@ -8,7 +8,7 @@ $('#home').addClass('active');
 
 var notice;
 
-function renderBatteries(url, notice) {
+function renderBatteries(url) {
 	if (url === undefined || url === null) url = '/battery/all';
 	$.get(url, function(data) {
 			$('#content').empty();
@@ -106,5 +106,96 @@ $(document).on('click', '.glyphicon-floppy-disk', function(event) {
 $(document).on('click', '.glyphicon-ban-circle', function(event) {
 	$(this).closest('tr').find('div#edit-form-container').slideUp('400').delay('400', function() {
 		renderBatteries(curPage);
+	});
+});
+
+
+/* Returns the value of a parameter in an URL */
+function getURLParameter(url, parameter) {
+	var pos = url.indexOf(parameter);
+	if (pos === -1) {
+		return false;
+	}
+	pos += parameter.length + 1;
+	substr = url.substr(pos);
+	end = substr.indexOf('&');
+	if (end === -1) {
+		return substr;
+	}
+	return substr.substr(0, end);
+}
+
+/* Returns the previous page */
+function previousPageURL(url, parameter) {
+	var pos = url.indexOf(parameter);
+	if (pos === -1) {
+		return false;
+	}
+	pos += parameter.length + 1;
+	substr = url.substr(pos);
+	end = substr.indexOf('&');
+	page_value = (end === -1) ? substr : substr.substr(0, end);
+	end += pos + page_value.length;
+	first_chunk = url.substr(0, pos);
+	last_chunk = url.substr(end + 1, url.length);
+	prev_page = parseInt(page_value) - 1;
+	prev_page_url = first_chunk + prev_page + last_chunk;
+	return prev_page_url;
+}
+
+/* Returns the next page */
+function nextPageURL(url, parameter) {
+	var pos = url.indexOf(parameter);
+	if (pos === -1) {
+		return false;
+	}
+	pos += parameter.length + 1;
+	substr = url.substr(pos);
+	end = substr.indexOf('&');
+	page_value = (end === -1) ? substr : substr.substr(0, end);
+	end += pos + page_value.length;
+	first_chunk = url.substr(0, pos);
+	last_chunk = url.substr(end + 1, url.length);
+	next_page = parseInt(page_value) + 1;
+	next_page_url = first_chunk + next_page + last_chunk;
+	return next_page_url;
+}
+
+/* Delete battery */
+$(document).on('click', '.glyphicon-remove', function(event) {
+	var thiz = $(this);
+	var id = thiz.next('input:hidden').val();
+
+	$.ajax({
+		url: '/battery/' + id,
+		type: 'DELETE'
+	})
+	.done(function(data) {
+		var executed = false;
+		thiz.closest('tr')
+			.find('td')
+			.wrapInner('<div style="display: block;" />')
+			.parent()
+			.find('td > div')
+			//.find('div')
+			.slideUp(200)
+			.delay(200, function() {
+				if (!executed) {
+					thiz.closest('td').remove();
+					if ($('.table > tbody > tr').length > 1) {
+						renderBatteries(curPage);
+					} else {
+						var page = getURLParameter(curPage, 'page');
+						if (page !== '1') {
+							prevPage = previousPageURL(curPage, 'page');
+							renderBatteries(prevPage);
+							curPage = prevPage;
+						} else {
+							renderBatteries();
+						}
+					}
+					executed = true;
+				}
+			});
 	});
 });

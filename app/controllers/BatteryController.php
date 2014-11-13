@@ -99,4 +99,8 @@ class BatteryController extends \BaseController {
 		return Response::json($data);
 	}
 
+	public function destroy($id) {
+		Battery::find($id)->delete();
+	}
+
 }
