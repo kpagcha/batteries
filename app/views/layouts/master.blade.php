@@ -10,27 +10,29 @@
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<!-- <div class="container-fluid"> -->
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-						<span class="sr-only">Enable navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a href="#" id="home-brand" class="navbar-brand">Batteries App</a>
-				</div>
-				<div class="collapse navbar-collapse" id="navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li id="home"><a href="#">Home</a></li>
-						<li id="manage-batteries"><a href="#">Manage batteries</a></li>
-					</ul>
-				</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+					<span class="sr-only">Enable navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" id="home-brand" class="navbar-brand">Batteries App</a>
 			</div>
-		</nav>
-	<!-- </div> -->
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li id="home"><a href="#">Home</a></li>
+					<li id="manage-batteries"><a href="#">Manage batteries</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Login</a></li>
+					<li><a href="#">Sign up</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<div class="container">
 		<div id="content" class="col-md-12">
 			@yield("content")

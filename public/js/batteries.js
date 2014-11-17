@@ -15,10 +15,11 @@ function renderBatteries(url) {
 			$('#content').append(data['view']);
 			if (data['empty']) {
 				$('#batteries-list').empty();
-				$('#content').append('<div class="alert alert-info top-buffer col-md-6 col-md-offset-3 text-center">No batteries found in the database.</div>');
+				$('#manage-batteries-container').append('<div class="alert alert-info top-buffer col-md-6 col-md-offset-3 text-center">No batteries found in the database.</div>');
 			}
 			if (notice) {
 				$('#success').html(notice);
+				$('#success').removeClass('hidden');
 				notice = null;
 			}
 		});
@@ -67,7 +68,7 @@ $(document).on('click', '#create-battery', function(event) {
 
 /* Reload batteries after closing modal */
 $(document).on('hidden.bs.modal', '#add-new-battery', function(e) {
-	renderBatteries(null, notice);
+	renderBatteries();
 });
 
 /* Edit battery */

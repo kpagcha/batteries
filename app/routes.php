@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function() {
-	return View::make('home.index');
-});
+Route::get('/', ['uses' => 'HomeController@index']);
 
 Route::group(['before' => 'ajax'], function() {
 	Route::get('/home/main', ['as' => 'home.main', 'uses' => 'HomeController@main']);

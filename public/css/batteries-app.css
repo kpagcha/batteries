@@ -15,9 +15,6 @@ body {
 
 #content {
 	margin-top: 30px;
-	background-color: rgba(210,210,210,0.4);
-	border-radius: 5px;
-	box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.5);
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -32,3 +29,13 @@ body {
 	background-color: #C9CCFF;
 	border-color: #ABBFE8;
 }*/
+
+#manage-batteries-container {
+	background-color: rgba(210,210,210,0.4);
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.5);
+}
+
+#main-tabs {
+	border-bottom: none;
+}
