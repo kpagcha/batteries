@@ -24,16 +24,26 @@
 			<div class="collapse navbar-collapse" id="navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li id="home"><a href="#">Home</a></li>
-					<li id="manage-batteries"><a href="#">Manage batteries</a></li>
+					@if (Auth::check() && Auth::user()->hasRole('administrator'))
+						<li id="manage-batteries"><a href="/battery/all">Manage batteries</a></li>
+					@endif
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Login</a></li>
-					<li><a href="#">Sign up</a></li>
+					@if (Auth::check())
+						<li id="logout"><a href="/logout">Logout ({{ Auth::user()->email }})</a></li>
+					@else
+						<li id="login"><a href="/login">Login</a></li>
+						<li id="register"><a href="/register">Sign up</a></li>
+					@endif
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<div class="container">
+		@if(Session::has('flash_notice'))
+            <div id="flash_notice" class="col-md-3 col-md-offset-4 col-xs-12 text-center alert alert-success">{{ Session::get('flash_notice') }}</div>
+        @endif
+		<div id="notice" class="col-md-3 col-md-offset-4 col-xs-12 text-center alert alert-success hidden"></div>
 		<div id="content" class="col-md-12">
 			@yield("content")
 		</div>
@@ -41,5 +51,6 @@
 	{{ HTML::script('js/bootstrap.js') }}
 	{{ HTML::script('js/batteries.js') }}
 	{{ HTML::script('js/home.js') }}
+	{{ HTML::script('js/users.js') }}
 </body>
 </html>

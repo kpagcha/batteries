@@ -3,15 +3,15 @@
 {{ Form::close() }}
 
 
-<div id="manage-batteries-container" class="col-md-12">
+<div id="manage-batteries-container" class="col-md-12 col-xs-12 container-fluid container-default">
 	<div style="padding:2em">
 		<div id="success" class="alert alert-success hidden text-center"></div>
-		<div class="col-md-6 col-md-offset-5">
+		<div class="col-md-6 col-md-offset-5 col-xs-6 col-xs-offset-4">
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#add-new-battery">Add new battery</button>
 		</div>	
 	</div>
-	<div class="col-md-12" id="batteries-list">
-		<table class="table table-responsive" style="margin-top:4em">
+	<div class="col-md-12 col-xs-12 table-responsive" id="batteries-list">
+		<table class="table" style="margin-top:4em">
 			<thead>
 				<tr>
 					<th>Price</th>

@@ -21,6 +21,8 @@ function renderBatteries(url) {
 				$('#success').html(notice);
 				$('#success').removeClass('hidden');
 				notice = null;
+			} else {
+				$('#success').addClass('hidden');
 			}
 		});
 }
@@ -113,6 +115,9 @@ $(document).on('click', '.glyphicon-ban-circle', function(event) {
 
 /* Returns the value of a parameter in an URL */
 function getURLParameter(url, parameter) {
+	if (url == undefined) {
+		return '1';
+	}
 	var pos = url.indexOf(parameter);
 	if (pos === -1) {
 		return false;
@@ -172,6 +177,7 @@ $(document).on('click', '.glyphicon-remove', function(event) {
 		type: 'DELETE'
 	})
 	.done(function(data) {
+		notice = null;
 		var executed = false;
 		thiz.closest('tr')
 			.find('td')

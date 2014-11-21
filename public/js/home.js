@@ -11,9 +11,15 @@ function renderHomePage() {
 
 /* "Assign to view" or "respond to click" functions */
 
+/* Clear active links */
+function clearActiveLinks() {
+	$('#home, #manage-batteries, #login, #signup').removeClass('active');
+}
+
+/* Go to main page */
 $(document).on('click', '#home, #home-brand', function (event) {
 	event.preventDefault();
-    $('#manage-batteries').removeClass('active');
+    clearActiveLinks();
     $('#home').addClass('active');
 	renderHomePage();
 });

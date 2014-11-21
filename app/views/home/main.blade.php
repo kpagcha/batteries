@@ -1,7 +1,9 @@
 <div class="col-md-6 col-md-offset-2" role="tabpanel">
-	<ul id="main-tabs" class="nav nav-tabs col-md-offset-4" role="tablist">
+	<ul id="main-tabs" class="nav nav-tabs col-md-offset-4 col-xs-offset-4" role="tablist">
 	    <li role="presentation" class="active"><a id="catalog-tab" href="#catalog" aria-controls="catalog" role="tab" data-toggle="tab"><img src="/images/sprites/catalog.png"></a></li>
-	    <li role="presentation"><a id="shopping-cart-tab" href="#shopping-cart" aria-controls="shopping-cart" role="tab" data-toggle="tab"><img src="/images/sprites/shopping-cart-empty.png"></a></li>
+	    @if (Auth::check() && Auth::user()->hasRole('customer'))
+	    	<li role="presentation"><a id="shopping-cart-tab" href="#shopping-cart" aria-controls="shopping-cart" role="tab" data-toggle="tab"><img src="/images/sprites/shopping-cart-empty.png"></a></li>
+	    @endif
 	</ul>
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="catalog">
@@ -22,20 +24,24 @@
 								@if ($battery->technology != "")
 									&#8212; {{ $battery->technology }}
 								@endif
-								<span class="pull-right">+</span>
+								@if (Auth::check() && Auth::user()->hasRole('customer'))
+									<span class="pull-right">+</span>
+								@endif
 							</li>
 						@endforeach
 					</ul>
 				@endif
 			</div>
 		</div>
-		<div role="tabpanel" class="tab-pane" id="shopping-cart">
-			<div class="panel panel-default">
-				<div class="panel-heading">Your shopping cart</div>
-				<div class="panel-body">
-					This is your shopping cart.
+		@if (Auth::check() && Auth::user()->hasRole('customer'))
+			<div role="tabpanel" class="tab-pane" id="shopping-cart">
+				<div class="panel panel-default">
+					<div class="panel-heading">Your shopping cart</div>
+					<div class="panel-body">
+						This is your shopping cart.
+					</div>
 				</div>
 			</div>
-		</div>
+		@endif
 	</div>
 </div>

@@ -30,12 +30,24 @@ body {
 	border-color: #ABBFE8;
 }*/
 
-#manage-batteries-container {
-	background-color: rgba(210,210,210,0.4);
+.container-default {
+	background-color: rgba(210,210,210,0.55);
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.5);
 }
 
 #main-tabs {
 	border-bottom: none;
+}
+
+@media screen and (max-width: 767px) {
+	.table-responsive {
+		border: none;
+		overflow: scroll;
+		overflow: auto;
+	}
+}
+
+.extra-padding {
+	padding: 40px;
 }
