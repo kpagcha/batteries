@@ -11,8 +11,7 @@ var notice;
 function renderBatteries(url) {
 	if (url === undefined || url === null) url = '/battery/all';
 	$.get(url, function(data) {
-			$('#content').empty();
-			$('#content').append(data['view']);
+			$('#content').html(data['view']);
 			if (data['empty']) {
 				$('#batteries-list').empty();
 				$('#manage-batteries-container').append('<div class="alert alert-info top-buffer col-md-6 col-md-offset-3 text-center">No batteries found in the database.</div>');

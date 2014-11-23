@@ -30,3 +30,9 @@ $(document).on('click', '#home, #home-brand', function (event) {
     $('#home').addClass('active');
 	renderHomePage();
 });
+
+/* Clear notice messages when navigating tabs */
+$(document).on('click', 'li[role=presentation]', function(event) {
+	event.preventDefault();
+	$('#notice').addClass('hidden');
+});

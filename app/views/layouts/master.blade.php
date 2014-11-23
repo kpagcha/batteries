@@ -41,10 +41,7 @@
 		</div>
 	</nav>
 	<div class="container">
-		@if(Session::has('flash_notice'))
-            <div id="flash_notice" class="col-md-3 col-md-offset-4 col-xs-12 text-center alert alert-success">{{ Session::get('flash_notice') }}</div>
-        @endif
-		<div id="notice" class="col-md-3 col-md-offset-4 col-xs-12 text-center alert alert-success hidden"></div>
+		<div id="notice" class="col-md-3 col-md-offset-3 col-sm-5 col-sm-offset-2 col-xs-8 col-xs-offset-2 text-center alert alert-success hidden"></div>
 		<div id="content" class="col-md-12">
 			@yield("content")
 		</div>
@@ -53,5 +50,6 @@
 	{{ HTML::script('js/batteries.js') }}
 	{{ HTML::script('js/home.js') }}
 	{{ HTML::script('js/users.js') }}
+	{{ HTML::script('js/cart.js') }}
 </body>
 </html>

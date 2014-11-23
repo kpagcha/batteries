@@ -14,7 +14,19 @@ body {
 }
 
 #content {
+	position: relative;
+	top: 70px;
 	margin-top: 30px;
+}
+
+#notice {
+	position: absolute;	
+}
+
+@media screen and (max-width: 767px) {
+	#notice {
+		width: 50%;
+	}
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -24,11 +36,6 @@ body {
 .table > thead > tr > th {
 	border-bottom: 2px solid #333;
 }
-
-/*.btn-default {
-	background-color: #C9CCFF;
-	border-color: #ABBFE8;
-}*/
 
 .container-default {
 	background-color: rgba(210,210,210,0.55);
@@ -56,6 +63,20 @@ body {
 	width: 110px;
 }
 
-#catalog a {
+#catalog a, #shopping-cart a {
 	color: #000;
+}
+
+.delete {
+	color: #a94442;
+}
+
+.modify-cart-amount {
+	border: 1px solid transparent;
+	background-color: transparent;
+	padding: 0px 4px; 
+}
+
+.top-void {
+	padding-top: 10px;
 }

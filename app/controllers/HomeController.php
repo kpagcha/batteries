@@ -4,8 +4,11 @@ class HomeController extends \BaseController {
 
 	public function index() {
 		$batteries = Battery::all();
+		if (Auth::check()){
+			$cart_batteries = Auth::user()->getCartItems();
+			return View::make('home.index', compact('batteries'))->with('cart_batteries', $cart_batteries);
+		}
     	return View::make('home.index', compact('batteries'));
-		return Response::json(['view' => $view]);
 	}
 
 	public function main() {

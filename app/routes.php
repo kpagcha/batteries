@@ -30,8 +30,7 @@ Route::group(['before' => 'ajax'], function() {
 		Route::get('/cart', ['uses' => 'CartController@index']);
 		Route::post('/cart', ['uses' => 'CartController@add']);
 		Route::delete('/cart/{id}', ['uses' => 'CartController@destroy']);
-		Route::get('/cart/{id}/more', ['uses' => 'CartController@more']);
-		Route::get('/cart/{id}/less', ['uses' => 'CartController@less']);
+		Route::post('/cart/changeAmount', ['uses' => 'CartController@changeAmount']);
 	});
 
 	Route::get('/home/main', ['as' => 'home.main', 'uses' => 'HomeController@main']);
