@@ -103,4 +103,14 @@ class BatteryController extends \BaseController {
 		Battery::find($id)->delete();
 	}
 
+	public function show($id) {
+		$battery = Battery::find($id);
+
+		$view = View::make('batteries.show', compact('battery'))->render();
+
+		return Response::json([
+			'view' => $view
+		]);
+	}
+
 }

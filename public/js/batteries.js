@@ -212,3 +212,20 @@ $(document).on('click', '.glyphicon-remove', function(event) {
 			});
 	});
 });
+
+/* Show battery */
+$(document).on('click', 'a[name=show-battery]', function(event) {
+	event.preventDefault();
+	var id = $(this).parent().find("input[name='battery-id']").val();
+	var parent = $(this).parent();
+	if (parent.find('div#show-battery').length) {
+		parent.find('div#show-battery').slideUp('200',function() {
+			parent.find('div#show-battery').remove();
+		});
+	} else {
+		$.get('/battery/' + id, function(data) {
+			parent.append(data['view']);
+			parent.find('div#show-battery').hide().slideDown('400');
+		});
+	}
+});

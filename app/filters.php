@@ -108,3 +108,9 @@ Route::filter('admin', function() {
 	if (!Auth::check() || !Auth::user()->hasRole('administrator'))
 		return Redirect::to('/');
 });
+
+/* Only customer */
+Route::filter('customer', function() {
+	if (!Auth::check() || !Auth::user()->hasRole('customer'))
+		return Redirect::to('/');
+});

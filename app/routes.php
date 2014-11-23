@@ -25,6 +25,15 @@ Route::group(['before' => 'ajax'], function() {
 		Route::post('/user', ['uses' => 'UserController@create']);
 		Route::delete('/user/{user}', ['uses' => 'UserController@destroy']);
 	});
+
+	Route::group(['before' => 'customer'], function() {
+		Route::get('/cart', ['uses' => 'CartController@index']);
+		Route::post('/cart', ['uses' => 'CartController@add']);
+		Route::delete('/cart/{id}', ['uses' => 'CartController@destroy']);
+		Route::get('/cart/{id}/more', ['uses' => 'CartController@more']);
+		Route::get('/cart/{id}/less', ['uses' => 'CartController@less']);
+	});
+
 	Route::get('/home/main', ['as' => 'home.main', 'uses' => 'HomeController@main']);
 
 	Route::get('/login', ['as' => 'login', 'uses' => 'UserController@login'])->before('guest');
@@ -32,4 +41,6 @@ Route::group(['before' => 'ajax'], function() {
 	Route::get('/logout', ['as' => 'logout', 'uses' => 'UserController@logout'])->before('auth');
 	Route::get('/signup', ['as' => 'register', 'uses' => 'UserController@register'])->before('guest');
 	Route::post('/signup', ['as' => 'signup', 'uses' => 'UserController@signup']);
+
+	Route::get('/battery/{id}', ['uses' => 'BatteryController@show']);
 });

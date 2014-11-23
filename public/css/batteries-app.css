@@ -51,3 +51,11 @@ body {
 .extra-padding {
 	padding: 40px;
 }
+
+.tooltip {
+	width: 110px;
+}
+
+#catalog a {
+	color: #000;
+}

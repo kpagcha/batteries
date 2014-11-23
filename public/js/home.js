@@ -7,6 +7,13 @@ function renderHomePage() {
 	});
 }
 
+/* Initialize Bootstrap tooltip opt-in */ 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({
+  	delay: { show: 700, hide: 100 }
+  });
+});
+
 /* --------------------------------------------------------------------------------------------------------------------/*
 
 /* "Assign to view" or "respond to click" functions */
