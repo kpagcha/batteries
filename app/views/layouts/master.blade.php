@@ -26,6 +26,7 @@
 					<li id="home"><a href="#">Home</a></li>
 					@if (Auth::check() && Auth::user()->hasRole('administrator'))
 						<li id="manage-batteries"><a href="/battery/all">Manage batteries</a></li>
+						<li id="manage-users"><a href="/users/all">Manage users</a></li>
 					@endif
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

@@ -41,9 +41,15 @@ $(document).on('click', '.pagination a', function (event) {
 
 /* "Assign to view" or "respond to click" functions */
 
+/* Clear active links */
+function clearActiveLinks() {
+	$('#navbar-collapse li').removeClass('active');
+}
+
 /* Click on menu: manage batteries */
 $(document).on('click', '#manage-batteries', function (event) {
     event.preventDefault();
+    clearActiveLinks();
     $('#home').removeClass('active');
     $('#manage-batteries').addClass('active');
     renderBatteries();

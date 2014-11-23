@@ -13,7 +13,7 @@ function renderHomePage() {
 
 /* Clear active links */
 function clearActiveLinks() {
-	$('#home, #manage-batteries, #login, #signup').removeClass('active');
+	$('#navbar-collapse li').removeClass('active');
 }
 
 /* Go to main page */

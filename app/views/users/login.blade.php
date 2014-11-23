@@ -1,4 +1,3 @@
-
 <div class="col-md-6 col-md-offset-2 col-xs-12 container-default">
     <div class="text-center extra-padding">
         <h1>Login</h1>

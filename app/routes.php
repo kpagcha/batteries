@@ -22,8 +22,7 @@ Route::group(['before' => 'ajax'], function() {
 		Route::delete('/battery/{battery}', ['as' => 'battery.destroy', 'uses' => 'BatteryController@destroy']);
 
 		Route::get('/user', ['uses' => 'UserController@index']);
-		Route::get('/user', ['uses' => 'UserController@create']);
-		Route::post('/user', ['uses' => 'UserController@store']);
+		Route::post('/user', ['uses' => 'UserController@create']);
 		Route::delete('/user/{user}', ['uses' => 'UserController@destroy']);
 	});
 	Route::get('/home/main', ['as' => 'home.main', 'uses' => 'HomeController@main']);
