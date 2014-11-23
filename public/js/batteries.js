@@ -29,12 +29,67 @@ function renderBatteries(url) {
 var curPage = null;
 $(document).on('click', '.pagination a', function (event) {
     event.preventDefault();
-    if ( $(this).attr('href') != '#' ) {
+    if ($(this).attr('href') != '#') {
         $("html, body").animate({ scrollTop: 0 }, "fast");
         curPage = $(this).attr('href');
         renderBatteries(curPage);
     }
 });
+
+/* Returns the value of a parameter in an URL */
+function getURLParameter(url, parameter) {
+	if (url == undefined) {
+		return '1';
+	}
+	var pos = url.indexOf(parameter);
+	if (pos === -1) {
+		return false;
+	}
+	pos += parameter.length + 1;
+	substr = url.substr(pos);
+	end = substr.indexOf('&');
+	if (end === -1) {
+		return substr;
+	}
+	return substr.substr(0, end);
+}
+
+/* Returns the previous page */
+function previousPageURL(url, parameter) {
+	var pos = url.indexOf(parameter);
+	if (pos === -1) {
+		return false;
+	}
+	pos += parameter.length + 1;
+	substr = url.substr(pos);
+	end = substr.indexOf('&');
+	page_value = (end === -1) ? substr : substr.substr(0, end);
+	end += pos + page_value.length;
+	first_chunk = url.substr(0, pos);
+	last_chunk = url.substr(end + 1, url.length);
+	prev_page = parseInt(page_value) - 1;
+	prev_page_url = first_chunk + prev_page + last_chunk;
+	return prev_page_url;
+}
+
+/* Returns the next page */
+function nextPageURL(url, parameter) {
+	var pos = url.indexOf(parameter);
+	if (pos === -1) {
+		return false;
+	}
+	pos += parameter.length + 1;
+	substr = url.substr(pos);
+	end = substr.indexOf('&');
+	page_value = (end === -1) ? substr : substr.substr(0, end);
+	end += pos + page_value.length;
+	first_chunk = url.substr(0, pos);
+	last_chunk = url.substr(end + 1, url.length);
+	next_page = parseInt(page_value) + 1;
+	next_page_url = first_chunk + next_page + last_chunk;
+	return next_page_url;
+}
+
 
 /* --------------------------------------------------------------------------------------------------------------------/*
 
@@ -116,61 +171,6 @@ $(document).on('click', '.glyphicon-ban-circle', function(event) {
 		renderBatteries(curPage);
 	});
 });
-
-
-/* Returns the value of a parameter in an URL */
-function getURLParameter(url, parameter) {
-	if (url == undefined) {
-		return '1';
-	}
-	var pos = url.indexOf(parameter);
-	if (pos === -1) {
-		return false;
-	}
-	pos += parameter.length + 1;
-	substr = url.substr(pos);
-	end = substr.indexOf('&');
-	if (end === -1) {
-		return substr;
-	}
-	return substr.substr(0, end);
-}
-
-/* Returns the previous page */
-function previousPageURL(url, parameter) {
-	var pos = url.indexOf(parameter);
-	if (pos === -1) {
-		return false;
-	}
-	pos += parameter.length + 1;
-	substr = url.substr(pos);
-	end = substr.indexOf('&');
-	page_value = (end === -1) ? substr : substr.substr(0, end);
-	end += pos + page_value.length;
-	first_chunk = url.substr(0, pos);
-	last_chunk = url.substr(end + 1, url.length);
-	prev_page = parseInt(page_value) - 1;
-	prev_page_url = first_chunk + prev_page + last_chunk;
-	return prev_page_url;
-}
-
-/* Returns the next page */
-function nextPageURL(url, parameter) {
-	var pos = url.indexOf(parameter);
-	if (pos === -1) {
-		return false;
-	}
-	pos += parameter.length + 1;
-	substr = url.substr(pos);
-	end = substr.indexOf('&');
-	page_value = (end === -1) ? substr : substr.substr(0, end);
-	end += pos + page_value.length;
-	first_chunk = url.substr(0, pos);
-	last_chunk = url.substr(end + 1, url.length);
-	next_page = parseInt(page_value) + 1;
-	next_page_url = first_chunk + next_page + last_chunk;
-	return next_page_url;
-}
 
 /* Delete battery */
 $(document).on('click', '.glyphicon-remove', function(event) {

@@ -7,7 +7,7 @@
 	        	<h4 class="modal-title" id="add-new-battery-label">New battery</h4>
 	        	<ul id="errors" class="alert alert-warning list-unstyled hidden"></ul>
 	      	</div>
-	      	<div class="modal-body">
+	      	<div class="modal-body extra-padding">
 	      		@include('batteries.form')
 	      	</div>
 	      	<div class="modal-footer">

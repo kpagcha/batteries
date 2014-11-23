@@ -3,7 +3,7 @@
         <h1>Login</h1>
     </div>
 
-    <div id="error" class="col-md-8 col-md-offset-2 col-xs-12 text-center alert alert-danger hidden"></div>
+    <div id="error" class="col-md-12 col-xs-12 text-center alert alert-danger hidden"></div>
 
     <div class="col-md-12 col-xs-12">
     {{ Form::open(['id' => 'login-form', 'class' => 'form-horizontal']) }}

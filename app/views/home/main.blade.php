@@ -4,6 +4,12 @@
 	    @if (Auth::check() && Auth::user()->hasRole('customer'))
 	    	<li id="shopping-cart-tab" role="presentation"><a href="#shopping-cart"><img src="/images/sprites/shopping-cart-empty.png"></a></li>
 	    @endif
+	    @if (Auth::check() && (Auth::user()->hasRole('account_manager') || Auth::user()->hasRole('customer')))
+	    	<li id="negotiations-tab" role="presentation"><a href="#negotiations" aria-controls="negotiations" role="tab" data-toggle="tab"><img src="/images/sprites/negotiation.png"></a></li>
+	    @endif
+	    @if (Auth::check() && (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('account_manager')))
+	    	<li id="history-tab" role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab"><img src="/images/sprites/history.png"></a></li>
+	    @endif
 	</ul>
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="catalog">
@@ -35,11 +41,38 @@
 							</li>
 						@endforeach
 					</ul>
+					<div class="panel-footer text-center">
+						{{ $batteries->links() }}
+					</div>
 				@endif
 			</div>
 		</div>
 		@if (Auth::check() && Auth::user()->hasRole('customer'))
 			<div role="tabpanel" class="tab-pane" id="shopping-cart"></div>
+		@endif
+		@if (Auth::check() && (Auth::user()->hasRole('account_manager') || Auth::user()->hasRole('customer')))
+			<div role="tabpanel" class="tab-pane" id="negotiations">
+				<div class="panel panel-default">
+					<div class="panel-heading">Negotiations</div>
+					<div class="panel-body">
+						<p>Your active negotiations.</p>
+					</div>
+					<div class="panel-footer text-center">
+					</div>
+				</div>
+			</div>
+		@endif
+		@if (Auth::check() && (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('account_manager')))
+			<div role="tabpanel" class="tab-pane" id="history">
+				<div class="panel panel-default">
+					<div class="panel-heading">History of negotiations</div>
+					<div class="panel-body">
+						<p>History of all negotiations</p>
+					</div>
+					<div class="panel-footer text-center">
+					</div>
+				</div>
+			</div>
 		@endif
 	</div>
 </div>

@@ -67,7 +67,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     			$assigned_roles = $this->getIdInArray($roles, 'administrator');
     			break;
     		case 'account_manager':
-    			$assgined_roles = $this->getIdInArray($roles, 'account_manager');
+    			$assigned_roles = $this->getIdInArray($roles, 'account_manager');
     			break;
     		case 'customer':
     			$assigned_roles = $this->getIdInArray($roles, 'customer');
@@ -75,7 +75,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     		default:
     			throw new \Exception("The role '" . $role . "' does not exist");
     	}
-
+        
         $this->roles()->attach($assigned_roles);
     }
 }
