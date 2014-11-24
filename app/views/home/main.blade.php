@@ -1,20 +1,20 @@
 <div class="col-md-6 col-md-offset-2" role="tabpanel">
-	<ul id="main-tabs" class="nav nav-tabs col-md-offset-4 col-xs-offset-4" role="tablist">
-	    <li role="presentation" class="active"><a id="catalog-tab" href="#catalog" aria-controls="catalog" role="tab" data-toggle="tab"><img src="/images/sprites/catalog.png"></a></li>
+	<ul id="main-tabs" class="nav nav-tabs col-md-offset-4 col-xs-offset-3" role="tablist">
+	    <li role="presentation" class="active" data-toggle="tooltip" data-placement="top" title="Catalog"><a id="catalog-tab" href="#catalog" aria-controls="catalog" role="tab" data-toggle="tab"><img src="/images/sprites/battery.png"></a></li>
 	    @if (Auth::check() && Auth::user()->hasRole('customer'))
-	    	<li id="shopping-cart-tab" role="presentation"><a href="#shopping-cart"><img src="/images/sprites/shopping-cart-empty.png"></a></li>
+	    	<li id="shopping-cart-tab" role="presentation" data-toggle="tooltip" data-placement="top" title="Shopping cart"><a href="#shopping-cart"><img src="/images/sprites/shopping-cart-empty.png"></a></li>
 	    @endif
 	    @if (Auth::check() && (Auth::user()->hasRole('account_manager') || Auth::user()->hasRole('customer')))
-	    	<li id="negotiations-tab" role="presentation"><a href="#negotiations" aria-controls="negotiations" role="tab" data-toggle="tab"><img src="/images/sprites/negotiation.png"></a></li>
+	    	<li id="negotiations-tab" role="presentation" data-toggle="tooltip" data-placement="top" title="Current negotiations"><a href="#negotiations" aria-controls="negotiations" role="tab" data-toggle="tab"><img src="/images/sprites/negotiation.png"></a></li>
 	    @endif
 	    @if (Auth::check() && (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('account_manager')))
-	    	<li id="history-tab" role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab"><img src="/images/sprites/history.png"></a></li>
+	    	<li id="history-tab" role="presentation" data-toggle="tooltip" data-placement="top" title="History of negotiations"><a href="#history" aria-controls="history" role="tab" data-toggle="tab"><img src="/images/sprites/history.png"></a></li>
 	    @endif
 	</ul>
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="catalog">
 			<div class="panel panel-default">
-				<div class="panel-heading">Batteries catalog</div>
+				<div class="panel-heading text-center"><h4>Batteries catalog</h4></div>
 				<div class="panel-body">
 					<p>This is the catalog of <strong>Batteries App</strong>. We have everything you need!</p>
 					@if (count($batteries) == 0)
@@ -53,7 +53,7 @@
 		@if (Auth::check() && (Auth::user()->hasRole('account_manager') || Auth::user()->hasRole('customer')))
 			<div role="tabpanel" class="tab-pane" id="negotiations">
 				<div class="panel panel-default">
-					<div class="panel-heading">Negotiations</div>
+					<div class="panel-heading text-center"><h4>Negotiations</h4></div>
 					<div class="panel-body">
 						<p>Your active negotiations.</p>
 					</div>
@@ -65,7 +65,7 @@
 		@if (Auth::check() && (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('account_manager')))
 			<div role="tabpanel" class="tab-pane" id="history">
 				<div class="panel panel-default">
-					<div class="panel-heading">History of negotiations</div>
+					<div class="panel-heading-text-center"><h4>History of negotiations</h4></div>
 					<div class="panel-body">
 						<p>History of all negotiations</p>
 					</div>

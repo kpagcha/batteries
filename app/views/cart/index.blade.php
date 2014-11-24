@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-	<div class="panel-heading">Shopping cart</div>
+	<div class="panel-heading text-center"><h4>Shopping cart</h4></div>
 	<div class="panel-body">
 		<p>This is your shopping cart.</p>
 		@if (count($cart_batteries) == 0)
@@ -13,7 +13,7 @@
 			<?php $battery = $item['battery']; $amount = $item['amount']; ?>
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-1 col-sm-1 col-xs-1">
+					<div class="col-md-1 col-sm-1 col-xs-2">
 						<div class="btn-group-vertical">
 							<button id="increase" type="button" class="btn btn-default modify-cart-amount">
 								<span class="glyphicon glyphicon-chevron-up"></span>
@@ -31,7 +31,7 @@
 							</button>
 						</div>
 					</div>
-					<div class="col-md-11 col-sm-11 col-xs-11 top-void">
+					<div class="col-md-11 col-sm-11 col-xs-10 top-void">
 						{{ Form::open() }}
 							{{ Form::hidden('battery-id', $battery->id) }}
 						{{ Form::close() }}
@@ -50,5 +50,8 @@
 			</li>
 		@endforeach
 	</ul>
+	<div class="panel-footer text-center">
+		<pan data-toggle="tooltip" data-placement="bottom" title="Start negotiation"><a href="#" name="order"><img src="/images/sprites/order.png"></a><span>
+	</div>
 	@endif
 </diV
