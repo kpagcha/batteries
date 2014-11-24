@@ -51,5 +51,7 @@
 	{{ HTML::script('js/home.js') }}
 	{{ HTML::script('js/users.js') }}
 	{{ HTML::script('js/cart.js') }}
+	{{ HTML::script('js/order.js') }}
+	{{ HTML::script('js/negotiation.js') }}
 </body>
 </html>

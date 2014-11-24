@@ -13,9 +13,10 @@ class DatabaseSeeder extends Seeder {
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-		DB::table('users_roles')->truncate();
+		$this->call('ClearTablesSeeder');
 		$this->call('RoleTableSeeder');
 		$this->call('UserTableSeeder');
+		$this->call('StatusTableSeeder');
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}

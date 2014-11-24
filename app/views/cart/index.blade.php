@@ -51,7 +51,7 @@
 		@endforeach
 	</ul>
 	<div class="panel-footer text-center">
-		<pan data-toggle="tooltip" data-placement="bottom" title="Start negotiation"><a href="#" name="order"><img src="/images/sprites/order.png"></a><span>
+		<span data-toggle="tooltip" data-placement="bottom" title="Start negotiation"><a href="#" id="order"><img src="/images/sprites/order.png"></a><span>
 	</div>
 	@endif
 </diV

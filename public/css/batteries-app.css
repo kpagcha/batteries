@@ -72,12 +72,21 @@ body {
 	color: #a94442;
 }
 
-.modify-cart-amount {
+.modify-cart-amount, .no-borders-button {
 	border: 1px solid transparent;
-	background-color: transparent;
+	background-color: transparent !important;
 	padding: 0px 4px; 
+}
+
+.no-borders-button {
+	border: 0px;
 }
 
 .top-void {
 	padding-top: 10px;
+}
+
+.order-title {
+	padding: 10px;
+	border-top: 2px solid #ddd;
 }

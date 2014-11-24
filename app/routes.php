@@ -31,6 +31,12 @@ Route::group(['before' => 'ajax'], function() {
 		Route::post('/cart', ['uses' => 'CartController@add']);
 		Route::delete('/cart/{id}', ['uses' => 'CartController@destroy']);
 		Route::post('/cart/changeAmount', ['uses' => 'CartController@changeAmount']);
+
+		Route::get('/order/create', ['uses' => 'OrderController@create']);
+	});
+
+	Route::group(['before' => 'customer_or_account_manager'], function() {
+		Route::get('/negotiation', ['uses' => 'NegotiationController@index']);
 	});
 
 	Route::get('/home/main', ['as' => 'home.main', 'uses' => 'HomeController@main']);

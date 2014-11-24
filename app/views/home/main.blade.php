@@ -51,16 +51,7 @@
 			<div role="tabpanel" class="tab-pane" id="shopping-cart"></div>
 		@endif
 		@if (Auth::check() && (Auth::user()->hasRole('account_manager') || Auth::user()->hasRole('customer')))
-			<div role="tabpanel" class="tab-pane" id="negotiations">
-				<div class="panel panel-default">
-					<div class="panel-heading text-center"><h4>Negotiations</h4></div>
-					<div class="panel-body">
-						<p>Your active negotiations.</p>
-					</div>
-					<div class="panel-footer text-center">
-					</div>
-				</div>
-			</div>
+			<div role="tabpanel" class="tab-pane" id="negotiations"></div>
 		@endif
 		@if (Auth::check() && (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('account_manager')))
 			<div role="tabpanel" class="tab-pane" id="history">
