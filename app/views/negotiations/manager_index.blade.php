@@ -32,26 +32,30 @@
 
 					<li class="list-group-item list-group-item-info">
 						<div class="row">
-							<div class="col-md-11 col-sm-11 col-xs-10 top-void">
+							<div class="col-md-12 top-void">
 								{{ Form::open() }}
 									{{ Form::hidden('battery-id', $battery->id) }}
 								{{ Form::close() }}
-
-								<a id="take-negotiation" href="#negotiate" class="btn btn-default no-borders-button" data-toggle="tooltip" data-placement="left" title="Take this negotiation">
-									<img src="images/sprites/money.png"/>
-									{{ Form::open() }}
-										{{ Form::hidden('negotiation-id', $item['negotiation_id']) }}
-									{{ Form::close() }}
-								</a>
-								<span name="amount">
-									({{ $amount }})
-								</span>
-								<a name="show-battery" href="/battery/{{ $battery->id }}">
-									{{ $battery->name }} ({{ $battery->category }}), {{ $battery->voltage }} volts
-									@if ($battery->technology != "")
-										&#8212; {{ $battery->technology }}
-									@endif
-								</a>
+								
+								<div class="col-md-2 col-sm-2 col-xs-2">
+									<a id="take-negotiation" href="#negotiate" class="btn btn-default no-borders-button" data-toggle="tooltip" data-placement="left" title="Take this negotiation">
+										<img src="images/sprites/money.png"/>
+										{{ Form::open() }}
+											{{ Form::hidden('negotiation-id', $item['negotiation_id']) }}
+										{{ Form::close() }}
+									</a>
+								</div>
+								<div class="col-md-10 col-sm-10 col-xs-10">
+									<span name="amount">
+										({{ $amount }})
+									</span>
+									<a name="battery" href="/battery/{{ $battery->id }}">
+										{{ $battery->name }} ({{ $battery->category }}), {{ $battery->voltage }} volts
+										@if ($battery->technology != "")
+											&#8212; {{ $battery->technology }}
+										@endif
+									</a>
+								</div>
 							</div>
 						</div>
 					</li>

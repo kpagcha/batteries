@@ -7,7 +7,6 @@ class NegotiationController extends \BaseController {
 
 			$items = Negotiation::getCustomerNegotiatingItems();
 
-
 			$orders = [];
 			if (count($items)) {
 				foreach ($items as $item) {
@@ -46,7 +45,10 @@ class NegotiationController extends \BaseController {
 		$negotiation = Negotiation::find(Input::get('negotiation-id'));
 		$negotiation->manager_id = $manager_id;
 		$negotiation->setStatus('in_process');
+		$negotiation->turn = $negotiation->user_id;
 		$negotiation->save();
+
+		$this->saveRecord($negotiation);
 
 		$status_id = Status::where('name', '=', 'in_process')->first()->id;
 		$is_first_negotiation = count(Negotiation::where('manager_id', '=', 'manager_id')
@@ -71,6 +73,28 @@ class NegotiationController extends \BaseController {
 			'no_more_waiting_negotiations' => $no_more_waiting_negotiations
 		]);
 	}
+
+	/* Open negotiation process */
+	public function negotiate() {
+		$negotiation = Negotiation::find(Input::get('negotiation-id'));
+
+		$view = View::make('negotiations.negotiate', compact('negotiation'))->render();
+
+		return Response::json([
+			'view' => $view
+		]);
+	}
+
+	/* Returns the counter-offer form view */
+	public function counterOfferForm() {
+		//$negotiation_id = Input::get('negotiation-id');
+		$negotiation_id = 1;
+		$form = View::make('negotiations.counter_offer_form')->with('negotiation_id', $negotiation_id)->render();
+		return Response::json(['form' => $form]);
+	}
+
+	/* -------------------------------------------------------------------------------------------------------------*/
+	/* Private functions */
 
 	private function getUnattendedOrders() {
 		$unattended_items = Negotiation::getUnattendedNegotiatingItems();
@@ -102,13 +126,14 @@ class NegotiationController extends \BaseController {
 		return $active_orders;
 	}
 
-	public function negotiate() {
-		$negotiation = Negotiation::find(Input::get('negotiation-id'));
-
-		$view = View::make('negotiations.negotiate', compact('negotiation'))->render();
-
-		return Response::json([
-			'view' => $view
-		]);
+	private function saveRecord($negotiation) {
+		$record = new Record;
+		$record->battery_id = $negotiation->battery_id;
+		$record->price = $negotiation->price;
+		$record->amount = $negotiation->amount;
+		$record->customer_id = $negotiation->user_id;
+		$record->manager_id = $negotiation->manager_id;
+		$record->status_id = $negotiation->status_id;
+		$record->save();
 	}
 }

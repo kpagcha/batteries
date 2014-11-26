@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNegotiationsTable extends Migration {
+class CreateRecordsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,17 +12,16 @@ class CreateNegotiationsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('negotiations', function(Blueprint $table)
+		Schema::create('records', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id');
 			$table->integer('battery_id');
-			$table->integer('order_id');
-			$table->integer('manager_id')->nullable();
-			$table->integer('status_id');
-			$table->integer('turn')->nullable();
 			$table->float('price');
 			$table->integer('amount')->unsigned();
+			$table->integer('customer_id');
+			$table->integer('manager_id')->nullable();
+			$table->integer('order_id');
+			$table->integer('status_id');
 			$table->timestamps();
 		});
 	}
@@ -34,7 +33,7 @@ class CreateNegotiationsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('negotiations');
+		Schema::drop('records');
 	}
 
 }

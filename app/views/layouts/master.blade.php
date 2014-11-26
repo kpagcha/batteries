@@ -7,6 +7,13 @@
 	{{ HTML::style('css/batteries-app.css') }}
 	{{ HTML::script('js/jquery.js') }}
 	{{ HTML::script('js/jquery-ui.js') }}
+	{{ HTML::script('js/bootstrap.js') }}
+	{{ HTML::script('js/batteries.js') }}
+	{{ HTML::script('js/home.js') }}
+	{{ HTML::script('js/users.js') }}
+	{{ HTML::script('js/cart.js') }}
+	{{ HTML::script('js/order.js') }}
+	{{ HTML::script('js/negotiation.js') }}
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -46,12 +53,5 @@
 			@yield("content")
 		</div>
 	</div>
-	{{ HTML::script('js/bootstrap.js') }}
-	{{ HTML::script('js/batteries.js') }}
-	{{ HTML::script('js/home.js') }}
-	{{ HTML::script('js/users.js') }}
-	{{ HTML::script('js/cart.js') }}
-	{{ HTML::script('js/order.js') }}
-	{{ HTML::script('js/negotiation.js') }}
 </body>
 </html>

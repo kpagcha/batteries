@@ -1,4 +1,4 @@
-<div id="show">
+<div id="show" class="col-md-12">
 	<hr>
 	<div class="col-md-12 col-xs-12">
 		<div class="col-md-3 col-xs-12">

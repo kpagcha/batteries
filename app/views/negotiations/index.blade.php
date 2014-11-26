@@ -26,22 +26,29 @@
 
 					<li class="list-group-item {{ $status_class }}">
 						<div class="row">
-							<div class="col-md-11 col-sm-11 col-xs-10 top-void">
+							<div class="top-void">
 								{{ Form::open() }}
 									{{ Form::hidden('battery-id', $battery->id) }}
 								{{ Form::close() }}
+								
+								<div class="col-md-2 col-sm-2 col-xs-2">
+									<a href="#negotiate" class="btn btn-default {{ $disabled }} no-borders-button"><img src="images/sprites/money.png"></a>
+								</div>
 
-								<a href="#negotiate" class="btn btn-default {{ $disabled }} no-borders-button"><img src="images/sprites/money.png"></a>
-								<span name="amount">
-									({{ $amount }})
-								</span>
-								<a name="show-battery" href="/battery/{{ $battery->id }}">
-									{{ $battery->name }} ({{ $battery->category }}), {{ $battery->voltage }} volts
-									@if ($battery->technology != "")
-										&#8212; {{ $battery->technology }}
-									@endif
-								</a>
-								<div class="pull-right"><small>{{ $status }}</small></div>
+								<div class="col-md-7 col-sm-8 col-xs-8">
+									<span name="amount">
+										({{ $amount }})
+									</span>
+									<a name="battery" href="/battery/{{ $battery->id }}">
+										{{ $battery->name }} ({{ $battery->category }}), {{ $battery->voltage }} volts
+										@if ($battery->technology != "")
+											&#8212; {{ $battery->technology }}
+										@endif
+									</a>
+								</div>
+								<div class="col-md-3 col-sm-2 col-xs-2">
+									<div class="pull-right"><small>{{ $status }}</small></div>
+								</div>
 							</div>
 						</div>
 					</li>

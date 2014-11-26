@@ -20,6 +20,23 @@ $(document).on('click', '#negotiations-tab a', function(event) {
 	renderNegotiations();
 });
 
+/* Show battery */
+$(document).on('click', 'a[name=battery]', function(event) {
+	event.preventDefault();
+	var parent = $(this).parent().parent().parent();
+	var id = parent.find("input[name='battery-id']").val();
+	if (parent.find('div#show').length) {
+		parent.find('div#show').slideUp('200',function() {
+			parent.find('div#show').remove();
+		});
+	} else {
+		$.get('/battery/' + id, function(data) {
+			parent.append(data['view']);
+			parent.find('div#show').hide().slideDown('400');
+		});
+	}
+});
+
 /* Manager takes negotiation */
 $(document).on('click', '#take-negotiation', function(event) {
 	event.preventDefault();
@@ -54,15 +71,57 @@ $(document).on('click', '#take-negotiation', function(event) {
 $(document).on('click', '#display-negotiation', function(event) {
 	event.preventDefault();
 	var id = $(this).find("input[name='negotiation-id']").val();
-	var parent = $(this).parent();
-	if (parent.find('div#show').length) {
-		parent.find('div#show').slideUp('200',function() {
-			parent.find('div#show').remove();
+	var parent = $(this).parent().parent();
+	if (parent.find('div#show-negotiation').length) {
+		parent.find('div#show-negotiation').slideUp('200',function() {
+			parent.find('div#show-negotiation').remove();
 		});
 	} else {
 		$.get('/negotiation/negotiate', $(this).find('form').serialize(), function(data) {
 			parent.append(data['view']);
-			parent.find('div#show').hide().slideDown('400');
+			parent.find('div#show-negotiation').hide().slideDown('400');
 		});
 	}
+});
+
+/* Bootstrap popover when clicking counter-offer */
+$(document).on('click', '#counter-offer', function(e) {
+	e.preventDefault();
+	$.get('/negotiation/counter_offer_form', function(data) {
+		form = data['form'];
+	});
+	$(this).popover({
+		html: true,
+		placement: 'right',
+		content: form,
+		container: 'body',
+		trigger: 'click'
+	}).popover('toggle');
+});
+
+/* Bootstrap tooltip for accept offer */
+$(document).on('mouseover', '#accept-offer', function() {
+	$(this).tooltip({
+		placement: 'bottom',
+		title: 'Accept offer',
+		container: 'body'
+	}).tooltip('show');
+});
+
+/* Bootstrap tooltip for reject offer */
+$(document).on('mouseover', '#reject-offer', function() {
+	$(this).tooltip({
+		placement: 'bottom',
+		title: 'Reject offer permanently',
+		container: 'body'
+	}).tooltip('show');
+});
+
+/* Bootstrap tooltip for counter-offer */
+$(document).on('mouseover', '#counter-offer', function() {
+	$(this).tooltip({
+		placement: 'bottom',
+		title: 'Place counter-offer',
+		container: 'body'
+	}).tooltip('show');
 });

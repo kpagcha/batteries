@@ -15,13 +15,21 @@ class OrderController extends \BaseController {
 			$negotiation->amount = $cart_item->amount;
 			$negotiation->user_id = $user_id;
 			$negotiation->battery_id = $cart_item->battery->id;
-			$negotiation->turn = $user_id;
 			$negotiation->setStatus('open');
 			$negotiation->save();
 
 			$order->negotiations()->save(Negotiation::find($negotiation->id));
 
 			$cart_item->delete();
+
+			$record = new Record;
+			$record->battery_id = $cart_item->battery->id;
+			$record->price = $cart_item->battery->price;
+			$record->amount = $cart_item->amount;
+			$record->customer_id = $user_id;
+			$record->order_id = $order->id;
+			$record->status_id = $negotiation->status_id;
+			$record->save();
 		}
 	}
 }
