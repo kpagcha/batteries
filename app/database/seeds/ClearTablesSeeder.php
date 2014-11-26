@@ -13,7 +13,7 @@ class ClearTablesSeeder extends Seeder {
 		//     DB::table($name)->truncate();
 		// }
 
-		$tables = [ 'carts', 'negotiations', 'negotiations_statuses', 'orders',
+		$tables = [ 'carts', 'negotiations', 'orders',
 		 'roles', 'statuses', 'users', 'users_roles' ];
 
 		foreach ($tables as $table) {

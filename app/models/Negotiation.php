@@ -10,6 +10,10 @@ class Negotiation extends Eloquent {
     	return $this->belongsTo('User');
     }
 
+    public function manager() {
+        return $this->belongsTo('User', 'manager_id');
+    }
+
     public function battery() {
         return $this->belongsTo('Battery');
     }
@@ -19,7 +23,7 @@ class Negotiation extends Eloquent {
     }
 
     public function status() {
-        return $this->belongsToMany('Status', 'negotiations_statuses');
+        return $this->hasOne('Status');
     }
 
     public function hasStatus($status) {
@@ -59,17 +63,15 @@ class Negotiation extends Eloquent {
             default:
                 throw new \Exception("The status '" . $status . "' does not exist");
         }
-        $this->status()->attach($assigned_status);
+        $this->status_id = $assigned_status;
     }
 
     public static function getCustomerNegotiatingItems() {
         try {
-            $items = DB::table('negotiations')
-                        ->join('negotiations_statuses', 'negotiations.id', '=', 'negotiations_statuses.negotiation_id')
-                        ->where('user_id', '=', Auth::user()->id)
-                        ->where('status_id', '<', 4)
-                        // ->whereRaw("status_id not in (select status_id from statuses where name='completed' or name='rejected'")
-                        ->get();
+            $rejected = Status::where('name', '=', 'rejected')->first()->id;
+            $items = Negotiation::where('user_id', '=', Auth::user()->id)
+                ->where('status_id', '!=', $rejected)
+                ->get();
 
             $batteries = [];
             foreach ($items as $item) {
@@ -78,8 +80,8 @@ class Negotiation extends Eloquent {
                     'amount' => $item->amount,
                     'price' => $item->price,
                     'status' => Status::find($item->status_id),
-                    'order_id' => Negotiation::find($item->negotiation_id)->order->id,
-                    'negotiation_id' => $item->negotiation_id
+                    'order_id' => Negotiation::find($item->id)->order->id,
+                    'negotiation_id' => $item->id
                 ]);
             }
             return $batteries;
@@ -89,11 +91,9 @@ class Negotiation extends Eloquent {
     }
 
     public static function getUnattendedNegotiatingItems() {
-        try {
-            $items = DB::table('negotiations')
-                        ->join('negotiations_statuses', 'negotiations.id', '=', 'negotiations_statuses.negotiation_id')
-                        ->where('status_id', '=', 1)
-                        ->get();
+        try {            
+            $open = Status::where('name', '=', 'open')->first()->id;
+            $items = Negotiation::where('status_id', '=', $open)->get();
 
             $batteries = [];
             foreach ($items as $item) {
@@ -102,8 +102,8 @@ class Negotiation extends Eloquent {
                     'amount' => $item->amount,
                     'price' => $item->price,
                     'status' => Status::find($item->status_id),
-                    'order_id' => Negotiation::find($item->negotiation_id)->order->id,
-                    'negotiation_id' => $item->negotiation_id
+                    'order_id' => Negotiation::find($item->id)->order->id,
+                    'negotiation_id' => $item->id
                 ]);
             }
 
@@ -115,11 +115,8 @@ class Negotiation extends Eloquent {
 
     public static function getActiveNegotiatingItems() {
         try {
-            $items = DB::table('negotiations')
-                        ->join('negotiations_statuses', 'negotiations.id', '=', 'negotiations_statuses.negotiation_id')
-                        ->where('status_id', '=', 2)
-                        ->where('manager_id', '=', Auth::user()->id)
-                        ->get();
+            $in_process = Status::where('name', '=', 'in_process')->first()->id;
+            $items = Negotiation::where('status_id', '=', $in_process)->get();
 
             $batteries = [];
             foreach ($items as $item) {
@@ -128,8 +125,8 @@ class Negotiation extends Eloquent {
                     'amount' => $item->amount,
                     'price' => $item->price,
                     'status' => Status::find($item->status_id),
-                    'order_id' => Negotiation::find($item->negotiation_id)->order->id,
-                    'negotiation_id' => $item->negotiation_id
+                    'order_id' => Negotiation::find($item->id)->order->id,
+                    'negotiation_id' => $item->id
                 ]);
             }
             return $batteries;

@@ -120,3 +120,9 @@ Route::filter('customer_or_account_manager', function() {
 	if (!Auth::check() || !(Auth::user()->hasRole('customer') || Auth::user()->hasRole('account_manager')))
 		return Redirect::to('/');
 });
+
+/* Only account manager */
+Route::filter('account_manager', function() {
+	if (!Auth::check() || !Auth::user()->hasRole('account_manager'))
+		return Redirect::to('/');
+});

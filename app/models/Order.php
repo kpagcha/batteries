@@ -21,7 +21,7 @@ class Order extends Eloquent {
     }
 
     public function hasStatus($status) {
-        return $assigned_status == $status;
+        return $this->status->name == $status;
     }
 
     private function getIdInArray($array, $term) {

@@ -90,3 +90,11 @@ body {
 	padding: 10px;
 	border-top: 2px solid #ddd;
 }
+
+.list-group-item-primary {
+	background-color: #D2FFB4;
+}
+
+.list-group-item-primary a {
+	color: #597F36;
+}

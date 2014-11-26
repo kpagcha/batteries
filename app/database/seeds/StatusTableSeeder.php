@@ -6,7 +6,6 @@ class StatusTableSeeder extends Seeder {
     {
         Status::create(array('name' => 'open'));
         Status::create(array('name' => 'in_process'));
-        Status::create(array('name' => 'negotiated'));
         Status::create(array('name' => 'completed'));
         Status::create(array('name' => 'rejected'));
     }
