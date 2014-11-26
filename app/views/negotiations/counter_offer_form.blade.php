@@ -1,5 +1,5 @@
-<div class="col-md-12 text-center bottom-void">
-	<strong>Counter-offer</strong>
+<div id="counter-offer-form-container" class="col-md-12 text-center bottom-void">
+	<hr>
 	<form>
 		<div class="col-md-10 col-xs-12">
 			<input type='text' class='form-control' name='price' placeholder='Place new price'></input>

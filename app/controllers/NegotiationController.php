@@ -87,10 +87,10 @@ class NegotiationController extends \BaseController {
 
 	/* Returns the counter-offer form view */
 	public function counterOfferForm() {
-		//$negotiation_id = Input::get('negotiation-id');
-		$negotiation_id = 1;
-		$form = View::make('negotiations.counter_offer_form')->with('negotiation_id', $negotiation_id)->render();
-		return Response::json(['form' => $form]);
+		$negotiation_id = Input::get('negotiation-id');
+		$form = View::make('negotiations.counter_offer_form', compact('negotiation_id'))->render();
+
+		return Response::json(['form' => $form, 'negotiation_id' => $negotiation_id]);
 	}
 
 	/* -------------------------------------------------------------------------------------------------------------*/

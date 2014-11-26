@@ -85,19 +85,37 @@ $(document).on('click', '#display-negotiation', function(event) {
 });
 
 /* Bootstrap popover when clicking counter-offer */
+// $(document).on('click', '#counter-offer', function(e) {
+// 	e.preventDefault();
+// 	$.get('/negotiation/counter_offer_form', $(this).find('form').serialize(), function(data) {
+// 		form = data['form'];
+// 	});
+// 	$(this).popover({
+// 		html: true,
+// 		placement: 'right',
+// 		content: form,
+// 		container: 'body',
+// 		trigger: 'click'
+// 	}).popover('toggle');
+// });
+
+/* Load counter-offer form */
 $(document).on('click', '#counter-offer', function(e) {
 	e.preventDefault();
-	$.get('/negotiation/counter_offer_form', function(data) {
-		form = data['form'];
+	var thiz = $(this);
+	var element = thiz.closest('#negotiation-buttons').find('div#counter-offer-form-container')
+	$.get('/negotiation/counter_offer_form', $(this).find('form').serialize(), function(data) {
+		if (element.length) {
+			element.slideUp('200', function() {
+				element.remove();
+			});
+		}  else {
+			thiz.closest('#negotiation-buttons').append(data['form']).
+			find('#counter-offer-form-container').hide().slideDown(400);
+		}
 	});
-	$(this).popover({
-		html: true,
-		placement: 'right',
-		content: form,
-		container: 'body',
-		trigger: 'click'
-	}).popover('toggle');
 });
+
 
 /* Bootstrap tooltip for accept offer */
 $(document).on('mouseover', '#accept-offer', function() {
