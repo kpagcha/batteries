@@ -20,6 +20,7 @@ class CreateNegotiationsTable extends Migration {
 			$table->integer('order_id');
 			$table->integer('manager_id')->nullable();
 			$table->integer('status_id');
+			$table->integer('turn');
 			$table->float('price');
 			$table->integer('amount')->unsigned();
 			$table->timestamps();

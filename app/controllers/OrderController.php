@@ -15,6 +15,7 @@ class OrderController extends \BaseController {
 			$negotiation->amount = $cart_item->amount;
 			$negotiation->user_id = $user_id;
 			$negotiation->battery_id = $cart_item->battery->id;
+			$negotiation->turn = $user_id;
 			$negotiation->setStatus('open');
 			$negotiation->save();
 

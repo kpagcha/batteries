@@ -4,7 +4,7 @@ class NegotiationController extends \BaseController {
 	public function index() {
 
 		if (Auth::user()->hasRole('customer')) {
-try{
+
 			$items = Negotiation::getCustomerNegotiatingItems();
 
 
@@ -18,9 +18,7 @@ try{
 			}
 
 			$view = View::make('negotiations.index', compact('orders'))->render();
-			 } catch(Exception $e) {
-            error_log($e->getMessage());
-        }
+			
 			return Response::json([
 				'view' => $view
 			]);
@@ -44,7 +42,6 @@ try{
 
 	/* Assigns the negotiation to the manager */
 	public function take() {
-		try{
 		$manager_id = Auth::user()->id;
 		$negotiation = Negotiation::find(Input::get('negotiation-id'));
 		$negotiation->manager_id = $manager_id;
@@ -54,6 +51,9 @@ try{
 		$status_id = Status::where('name', '=', 'in_process')->first()->id;
 		$is_first_negotiation = count(Negotiation::where('manager_id', '=', 'manager_id')
 														->where('status_id', '=', $status_id)) == 1;
+
+		$status_id = Status::where('name', '=', 'open')->first()->id;
+		$no_more_waiting_negotiations = count(Negotiation::where('status_id', '=', $status_id)->get()) == 0;
 
 		$view = null;
 
@@ -67,9 +67,9 @@ try{
 		return Response::json([
 			'status' => true,
 			'first' => $is_first_negotiation,
-			'view' => $view
+			'view' => $view,
+			'no_more_waiting_negotiations' => $no_more_waiting_negotiations
 		]);
-		}catch(Exception $e){error_log($e->getMessage());}
 	}
 
 	private function getUnattendedOrders() {
@@ -100,5 +100,15 @@ try{
 		}
 
 		return $active_orders;
+	}
+
+	public function negotiate() {
+		$negotiation = Negotiation::find(Input::get('negotiation-id'));
+
+		$view = View::make('negotiations.negotiate', compact('negotiation'))->render();
+
+		return Response::json([
+			'view' => $view
+		]);
 	}
 }

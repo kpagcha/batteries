@@ -1,7 +1,6 @@
 <?php $battery = $item['battery']; $amount = $item['amount'];
 	$status = Status::find(Negotiation::find($item['negotiation_id'])->status_id)->name; $status_class = "";
 	switch ($status) {
-		case 'open': $status = 'waiting for vendor'; $status_class = 'list-group-item-info'; break;
 		case 'in_process': $status = 'in process'; $status_class = 'list-group-item-primary'; break;
 		case 'completed': $status_class = 'list-group-item-success'; break;
 		case 'rejected': $status_class = 'list-group-item-danger'; break;
@@ -14,7 +13,12 @@
 				{{ Form::hidden('battery-id', $battery->id) }}
 			{{ Form::close() }}
 
-			<a href="#negotiate" class="btn btn-default disabled no-borders-button"><img src="images/sprites/money.png"></a>
+			<a href="#display-negotiation" id="display-negotiation" class="btn btn-default no-borders-button">
+				<img src="images/sprites/money.png">
+				{{ Form::open() }}
+					{{ Form::hidden('negotiation-id', $item['negotiation_id']) }}
+				{{ Form::close() }}
+			</a>
 			<span name="amount">
 				({{ $amount }})
 			</span>

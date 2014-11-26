@@ -10,7 +10,7 @@
 	@if (count($orders))
 		@foreach ($orders as $key => $order)
 			<div class="text-center order-title">
-				<strong>Order #{{ $order[$key]['order_id'] }}</strong> <small>[{{ $order[$key]['status']['name'] }}]</small>
+				<strong>Order #{{ $order[$key]['order_id'] }}</strong>
 			</div>
 			<ul class="list-group">
 				@foreach ($order as $item)
@@ -31,7 +31,7 @@
 									{{ Form::hidden('battery-id', $battery->id) }}
 								{{ Form::close() }}
 
-								<a href="#negotiate" class="btn btn-default {{ $disabled }}} no-borders-button"><img src="images/sprites/money.png"></a>
+								<a href="#negotiate" class="btn btn-default {{ $disabled }} no-borders-button"><img src="images/sprites/money.png"></a>
 								<span name="amount">
 									({{ $amount }})
 								</span>

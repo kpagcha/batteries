@@ -26,18 +26,22 @@
 					<ul class="list-group">
 						@foreach ($batteries as $battery)
 							<li class="list-group-item">
-								{{ Form::open() }}
-									{{ Form::hidden('battery-id', $battery->id) }}
-								{{ Form::close() }}
-								<a name="show-battery" href="/battery/{{ $battery->id }}">
-									{{ $battery->name }} ({{ $battery->category }}), {{ $battery->voltage }} volts
-									@if ($battery->technology != "")
-										&#8212; {{ $battery->technology }}
-									@endif
-								</a>
-								@if (Auth::check() && Auth::user()->hasRole('customer'))
-									<span class="pull-right" data-toggle="tooltip" data-placement="right" title="Add to cart"><a href="#" name="add-to-cart">+</a></span>
-								@endif
+								<div class="row">
+									<div class="col-md-11 col-sm-11 col-xs-10 top-void">
+										{{ Form::open() }}
+											{{ Form::hidden('battery-id', $battery->id) }}
+										{{ Form::close() }}
+										<a name="show-battery" href="/battery/{{ $battery->id }}">
+											{{ $battery->name }} ({{ $battery->category }}), {{ $battery->voltage }} volts
+											@if ($battery->technology != "")
+												&#8212; {{ $battery->technology }}
+											@endif
+										</a>
+										@if (Auth::check() && Auth::user()->hasRole('customer'))
+											<span class="pull-right" data-toggle="tooltip" data-placement="right" title="Add to cart"><a href="#" name="add-to-cart">+</a></span>
+										@endif
+									</div>
+								</div>
 							</li>
 						@endforeach
 					</ul>

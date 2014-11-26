@@ -37,6 +37,7 @@ Route::group(['before' => 'ajax'], function() {
 
 	Route::group(['before' => 'customer_or_account_manager'], function() {
 		Route::get('/negotiation', ['uses' => 'NegotiationController@index']);
+		Route::get('/negotiation/negotiate', ['uses' => 'NegotiationController@negotiate']);
 	});
 
 	Route::group(['before' => 'account_manager'], function() {
