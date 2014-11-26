@@ -134,6 +134,38 @@ li.list-group-item.list-group-item-success {
 	border-top: 1px solid rgba(150, 170, 60, 0.6);
 }
 
+li.list-group-item.list-group-item-danger {
+	border-bottom: 1px solid rgba(169, 38, 66, 0.4);
+	border-top: 1px solid rgba(169, 38, 66, 0.4);
+	border-left: 0px;
+	border-right: 0px;
+	border-radius: 0px;
+}
+
+.list-group-item-danger a {
+	color: #a94442;
+}
+
+.list-group-item-danger hr {
+	border-top: 1px solid rgba(169, 38, 66, 0.4);
+}
+
+li.list-group-item.list-group-item-info {
+	border-bottom: 1px solid rgba(49, 112, 143, 0.6);
+	border-top: 1px solid rgba(49, 112, 143, 0.6);
+	border-left: 0px;
+	border-right: 0px;
+	border-radius: 0px;
+}
+
+.list-group-item-info a {
+	color: #31708f;
+}
+
+.list-group-item-info hr {
+	border-top: 1px solid rgba(49, 112, 143, 0.6);
+}
+
 .default-box {
 	color: #000;
 	background-color: rgba(255,255,255,0.4);

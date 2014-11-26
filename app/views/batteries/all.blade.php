@@ -83,6 +83,6 @@
 				</tr>
 			</tbody>
 		</table>
-		{{ $batteries->links() }}
+		<div id="batteries-links">{{ $batteries->links() }}</div>
 	</div>
 </div>

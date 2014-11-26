@@ -48,6 +48,10 @@ Route::group(['before' => 'ajax'], function() {
 		Route::get('/negotiation/take', ['uses' => 'NegotiationController@take']);
 	});
 
+	Route::group(['before' => 'admin_or_account_manager'], function() {
+		Route::get('/record', ['uses' => 'RecordController@index']);
+	});
+
 	Route::get('/home/main', ['as' => 'home.main', 'uses' => 'HomeController@main']);
 
 	Route::get('/login', ['as' => 'login', 'uses' => 'UserController@login'])->before('guest');

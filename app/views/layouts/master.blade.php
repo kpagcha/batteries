@@ -14,6 +14,7 @@
 	{{ HTML::script('js/cart.js') }}
 	{{ HTML::script('js/order.js') }}
 	{{ HTML::script('js/negotiation.js') }}
+	{{ HTML::script('js/records.js') }}
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 </head>
 <body>

@@ -27,7 +27,7 @@ function renderBatteries(url) {
 }
 
 var curPage = null;
-$(document).on('click', '.pagination a', function (event) {
+$(document).on('click', '#batteries-links a', function (event) {
     event.preventDefault();
     if ($(this).attr('href') != '#') {
         $("html, body").animate({ scrollTop: 0 }, "fast");

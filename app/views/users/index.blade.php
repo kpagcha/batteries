@@ -66,6 +66,6 @@
 				</tr>
 			</tbody>
 		</table>
-		{{ $users->links() }}
+		<div id="users-links">{{ $users->links() }}</div>
 	</div>
 </div>

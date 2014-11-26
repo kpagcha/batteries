@@ -12,6 +12,7 @@ function render(url) {
 /* Load the users list */
 function renderUsers(url) {
 	if (url === undefined || url === null) url = '/user';
+	alert('va')
 	$.get(url, function(data) {
 		if (!data['empty']) {
 			$('#content').html(data['view']);
@@ -170,7 +171,7 @@ $(document).on('click', '#manage-users', function(event) {
 });
 
 /* Click on pagination link */
-$(document).on('click', '.pagination a', function(event) {
+$(document).on('click', '#users-links a', function(event) {
     event.preventDefault();
     if ($(this).attr('href') != '#') {
         $("html, body").animate({ scrollTop: 0 }, "fast");

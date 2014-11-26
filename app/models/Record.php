@@ -18,4 +18,8 @@ class Record extends Eloquent {
     public function order() {
         return $this->belongsTo('Order');
     }
+
+    public function status() {
+        return $this->belongsTo('Status');
+    }
 }

@@ -45,7 +45,7 @@
 							</li>
 						@endforeach
 					</ul>
-					<div class="panel-footer text-center">
+					<div class="panel-footer text-center" id="catalog-links">
 						{{ $batteries->links() }}
 					</div>
 				@endif
@@ -58,16 +58,7 @@
 			<div role="tabpanel" class="tab-pane" id="negotiations"></div>
 		@endif
 		@if (Auth::check() && (Auth::user()->hasRole('administrator') || Auth::user()->hasRole('account_manager')))
-			<div role="tabpanel" class="tab-pane" id="history">
-				<div class="panel panel-default">
-					<div class="panel-heading-text-center"><h4>History of negotiations</h4></div>
-					<div class="panel-body">
-						<p>History of all negotiations</p>
-					</div>
-					<div class="panel-footer text-center">
-					</div>
-				</div>
-			</div>
+			<div role="tabpanel" class="tab-pane" id="history"></div>
 		@endif
 	</div>
 </div>
