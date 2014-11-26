@@ -12,7 +12,6 @@ function render(url) {
 /* Load the users list */
 function renderUsers(url) {
 	if (url === undefined || url === null) url = '/user';
-	alert('va')
 	$.get(url, function(data) {
 		if (!data['empty']) {
 			$('#content').html(data['view']);

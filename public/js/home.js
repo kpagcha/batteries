@@ -1,8 +1,9 @@
 /* "Working" functions or those with bussiness logic */
 
 function renderHomePage(url) {
+	var has_path = url.indexOf('home') != -1;
 	if (url === undefined || url === null) url = '/home/main';
-	url = url.replace('?page', '/home/main?page');
+	if (has_path == false) url = url.replace('?page', '/home/main?page');
 	$.get(url, function(data) {
 		$('#content').html(data['view']);
 	});
