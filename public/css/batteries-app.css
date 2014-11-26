@@ -115,6 +115,25 @@ li.list-group-item.list-group-item-primary {
 	border-top: 1px solid rgba(150, 170, 60, 0.6);
 }
 
+
+li.list-group-item.list-group-item-success {
+	background-color: #A3D667;
+	color: #597F36;
+	border-bottom: 1px solid rgba(150, 170, 60, 0.6);
+	border-top: 1px solid rgba(150, 170, 60, 0.6);
+	border-left: 0px;
+	border-right: 0px;
+	border-radius: 0px;
+}
+
+.list-group-item-success a {
+	color: #563;
+}
+
+.list-group-item-success hr {
+	border-top: 1px solid rgba(150, 170, 60, 0.6);
+}
+
 .default-box {
 	color: #000;
 	background-color: rgba(255,255,255,0.4);
@@ -146,6 +165,16 @@ li.list-group-item.list-group-item-primary {
 
 .proceed:hover {
 	color: #7D4C00;
+}
+
+#negotiation-buttons {
+	width: 300px;
+}
+
+@media screen and (max-width: 767px) {
+	#negotiation-buttons {
+		width: 230px;
+	}
 }
 
 #negotiation-buttons span {

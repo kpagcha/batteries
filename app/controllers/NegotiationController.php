@@ -75,22 +75,97 @@ class NegotiationController extends \BaseController {
 	}
 
 	/* Open negotiation process */
-	public function negotiate() {
+	public function negotiationForm() {
 		$negotiation = Negotiation::find(Input::get('negotiation-id'));
+
+		if (Status::find($negotiation->status_id)->name != 'in_process') {
+			return Reponse::json(['status' => false]);
+		}
 
 		$view = View::make('negotiations.negotiate', compact('negotiation'))->render();
 
 		return Response::json([
-			'view' => $view
+			'view' => $view,
+			'status' => true
 		]);
 	}
 
 	/* Returns the counter-offer form view */
 	public function counterOfferForm() {
 		$negotiation_id = Input::get('negotiation-id');
+
+		if (Negotiation::find($negotiation_id)->turn != Auth::user()->id) {
+			return Response::json(['status' => false]);
+		}
+
 		$form = View::make('negotiations.counter_offer_form', compact('negotiation_id'))->render();
 
-		return Response::json(['form' => $form, 'negotiation_id' => $negotiation_id]);
+		return Response::json(['form' => $form,
+			'negotiation_id' => $negotiation_id,
+			'status' => true
+		]);
+	}
+
+	/* Saves the counter offer sent by the customer/manager */
+	public function counterOffer() {
+
+		$negotiation = Negotiation::find(Input::get('negotiation-id'));
+
+		if ($negotiation->turn == Auth::user()->id && $negotiation->hasStatus('in_process')) {
+
+			$price = Input::get('price');
+
+			if ($price < 0) {
+				return Response::json(['invalid_price' => true]);
+			}
+
+			$turn = null;
+			if (Auth::user()->hasRole('customer')) {
+				if ($price >= $negotiation->price) {
+					return Response::json(['invalid_price' => true, 'status' => true]);
+				}
+				$turn = $negotiation->manager_id;
+			} else {
+				if ($price <= $negotiation->price) {
+					return Response::json(['invalid_price' => true, 'status' => true]);
+				}
+				$turn = $negotiation->user_id;
+			}
+
+			$negotiation->turn = $turn;
+			$negotiation->price = $price;
+			$negotiation->save();
+
+			$this->saveRecord($negotiation);
+
+			return Response::json(['invalid_price' => false, 'status' => true]);
+		} else {
+			return Response::json(['status' => false]);
+		}
+	}
+
+	/* Completes negotiation successfully */
+	public function complete() {
+
+		if ($negotiation->hasStatus('in_process')) {
+			$negotiation = Negotiation::find(Input::get('negotiation-id'));
+			$negotiation->setStatus('completed');
+			$negotiation->save();
+
+			$this->saveRecord($negotiation);
+		}
+	}
+
+	/* Cancels an offer */
+	public function reject() {
+
+		if ($negotiation->hasStatus('in_process')) {
+			$negotiation = Negotiation::find(Input::get('negotiation-id'));
+			$negotiation->setStatus('rejected');
+			$negotiation->save();
+
+			$this->saveRecord($negotiation);
+		}
 	}
 
 	/* -------------------------------------------------------------------------------------------------------------*/

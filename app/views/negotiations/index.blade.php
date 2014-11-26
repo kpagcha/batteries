@@ -26,16 +26,21 @@
 
 					<li class="list-group-item {{ $status_class }}">
 						<div class="row">
-							<div class="top-void">
+							<div class="col-md-12 top-void">
 								{{ Form::open() }}
 									{{ Form::hidden('battery-id', $battery->id) }}
 								{{ Form::close() }}
 								
 								<div class="col-md-2 col-sm-2 col-xs-2">
-									<a href="#negotiate" class="btn btn-default {{ $disabled }} no-borders-button"><img src="images/sprites/money.png"></a>
+									<a id="display-negotiation" href="#negotiate" class="btn btn-default {{ $disabled }} no-borders-button">
+										<img src="images/sprites/money.png">
+										{{ Form::open() }}
+											{{ Form::hidden('negotiation-id', $item['negotiation_id']) }}
+										{{ Form::close() }}
+									</a>
 								</div>
 
-								<div class="col-md-7 col-sm-8 col-xs-8">
+								<div class="col-md-8 col-sm-8 col-xs-8">
 									<span name="amount">
 										({{ $amount }})
 									</span>
@@ -46,7 +51,7 @@
 										@endif
 									</a>
 								</div>
-								<div class="col-md-3 col-sm-2 col-xs-2">
+								<div class="col-md-2 col-sm-2 col-xs-2">
 									<div class="pull-right"><small>{{ $status }}</small></div>
 								</div>
 							</div>

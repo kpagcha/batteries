@@ -37,8 +37,11 @@ Route::group(['before' => 'ajax'], function() {
 
 	Route::group(['before' => 'customer_or_account_manager'], function() {
 		Route::get('/negotiation', ['uses' => 'NegotiationController@index']);
-		Route::get('/negotiation/negotiate', ['uses' => 'NegotiationController@negotiate']);
-		Route::get('/negotiation/counter_offer_form', ['uses' => 'NegotiationController@counterOfferForm']);
+		Route::get('/negotiation/negotiation_form', ['uses' => 'NegotiationController@negotiationForm']);
+		Route::get('/negotiation/counter_offer', ['uses' => 'NegotiationController@counterOfferForm']);
+		Route::post('/negotiation/counter_offer', ['uses' => 'NegotiationController@counterOffer']);
+		Route::post('/negotiation/complete', ['uses' => 'NegotiationController@complete']);
+		Route::post('/negotiation/reject', ['uses' => 'NegotiationController@reject']);
 	});
 
 	Route::group(['before' => 'account_manager'], function() {

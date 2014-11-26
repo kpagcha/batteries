@@ -27,7 +27,7 @@ class Negotiation extends Eloquent {
     }
 
     public function hasStatus($status) {
-        return in_array($status, array_fetch($this->status->toArray(), 'name'));
+        return $this->status == Status::where('name', '=', $status)->first()->name;
     }
 
     private function getIdInArray($array, $term) {
@@ -50,9 +50,6 @@ class Negotiation extends Eloquent {
                 break;
             case 'in_process':
                 $assigned_status = $this->getIdInArray($statuses, 'in_process');
-                break;
-            case 'negotiated':
-                $assigned_status = $this->getIdInArray($statuses, 'negotiated');
                 break;
             case 'completed':
                 $assigned_status = $this->getIdInArray($statuses, 'completed');

@@ -100,5 +100,5 @@ $(document).on('click', '#home, #home-brand', function (event) {
 /* Clear notice messages when navigating tabs */
 $(document).on('click', 'li[role=presentation]', function(event) {
 	event.preventDefault();
-	$('#notice').addClass('hidden');
+	$('#notice').addClass('hidden').addClass('alert-success').removeClass('alert-danger');
 });

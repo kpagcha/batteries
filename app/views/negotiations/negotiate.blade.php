@@ -8,14 +8,21 @@
 	<div id="negotiation-buttons" class="btn-group">
 		<div class="col-md-8 col-xs-8">
 			<button id="accept-offer" type="button" class="btn btn-default no-borders-button succeed">
+				{{ Form::open() }}
+					{{ Form::hidden('negotiation-id', $negotiation->id) }}
+				{{ Form::close() }}
 				<span class="glyphicon glyphicon-ok-circle"></span>
 			</button>
 			<button id="reject-offer" type="button" class="btn btn-default no-borders-button delete">
+				{{ Form::open() }}
+					{{ Form::hidden('negotiation-id', $negotiation->id) }}
+				{{ Form::close() }}
 				<span class="glyphicon glyphicon-remove-circle"></span>
 			</button>
 		</div>
 		<div class="col-md-4 col-xs-4">
-			<button id="counter-offer" type="button" class="btn btn-default no-borders-button proceed">
+			<?php $disabled = ($negotiation->turn != Auth::user()->id) ? "disabled" : ""; ?>
+			<button id="counter-offer" type="button" class="btn btn-default no-borders-button proceed {{ $disabled }}">
 				{{ Form::open() }}
 					{{ Form::hidden('negotiation-id', $negotiation->id) }}
 				{{ Form::close() }}

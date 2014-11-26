@@ -70,48 +70,36 @@ $(document).on('click', '#take-negotiation', function(event) {
 /* Display negotiation form */
 $(document).on('click', '#display-negotiation', function(event) {
 	event.preventDefault();
-	var id = $(this).find("input[name='negotiation-id']").val();
 	var parent = $(this).parent().parent();
 	if (parent.find('div#show-negotiation').length) {
 		parent.find('div#show-negotiation').slideUp('200',function() {
 			parent.find('div#show-negotiation').remove();
 		});
 	} else {
-		$.get('/negotiation/negotiate', $(this).find('form').serialize(), function(data) {
-			parent.append(data['view']);
-			parent.find('div#show-negotiation').hide().slideDown('400');
+		$.get('/negotiation/negotiation_form', $(this).find('form').serialize(), function(data) {
+			if (data['status']) {
+				parent.append(data['view']);
+				parent.find('div#show-negotiation').hide().slideDown('400');
+			}
 		});
 	}
 });
-
-/* Bootstrap popover when clicking counter-offer */
-// $(document).on('click', '#counter-offer', function(e) {
-// 	e.preventDefault();
-// 	$.get('/negotiation/counter_offer_form', $(this).find('form').serialize(), function(data) {
-// 		form = data['form'];
-// 	});
-// 	$(this).popover({
-// 		html: true,
-// 		placement: 'right',
-// 		content: form,
-// 		container: 'body',
-// 		trigger: 'click'
-// 	}).popover('toggle');
-// });
 
 /* Load counter-offer form */
 $(document).on('click', '#counter-offer', function(e) {
 	e.preventDefault();
 	var thiz = $(this);
 	var element = thiz.closest('#negotiation-buttons').find('div#counter-offer-form-container')
-	$.get('/negotiation/counter_offer_form', $(this).find('form').serialize(), function(data) {
-		if (element.length) {
-			element.slideUp('200', function() {
-				element.remove();
-			});
-		}  else {
-			thiz.closest('#negotiation-buttons').append(data['form']).
-			find('#counter-offer-form-container').hide().slideDown(400);
+	$.get('/negotiation/counter_offer', $(this).find('form').serialize(), function(data) {
+		if (data['status']) {
+			if (element.length) {
+				element.slideUp('200', function() {
+					element.remove();
+				});
+			}  else {
+				thiz.closest('#negotiation-buttons').append(data['form']).
+				find('#counter-offer-form-container').hide().slideDown(400);
+			}
 		}
 	});
 });
@@ -142,4 +130,55 @@ $(document).on('mouseover', '#counter-offer', function() {
 		title: 'Place counter-offer',
 		container: 'body'
 	}).tooltip('show');
+});
+
+/* Send counter offer form */
+$(document).on('submit', '#counter-offer-form', function(event) {
+	event.preventDefault();
+	var container = $(this).closest('#show-negotiation');
+	$.post('/negotiation/counter_offer', $('#counter-offer-form').serialize(), function(data) {
+		if (data['status']) {
+			if (data['invalid_price']) {
+				$('input[name=price]').parent().addClass('has-error');
+			} else {
+				container.slideUp(200).delay(200, function() {
+					container.remove();
+					$('#notice').removeClass('hidden').html('Price proposal has been sent.');
+				});
+			}
+		}
+	});
+});
+
+/* Accept proposed price */
+$(document).on('click', '#accept-offer', function(event) {
+	event.preventDefault();
+	var container = $(this).closest('#show-negotiation');
+	var li = container.closest('li');
+	$.post('/negotiation/complete', $(this).find('form').serialize(), function(data) {
+		container.slideUp(200).delay(200, function() {
+			container.remove();
+			$('.tooltip').addClass('hidden');
+			li.removeClass('list-group-item-primary').addClass('list-group-item-success');
+			li.find('.pull-right').html('<small>completed</small>');
+			li.find('#display-negotiation').addClass('disabled');
+		});
+	});
+});
+
+/* Reject proposed price and stop negotiation */
+$(document).on('click', '#reject-offer', function(event) {
+	event.preventDefault();
+	var container = $(this).closest('#show-negotiation');
+	var li = container.closest('li');
+	$.post('/negotiation/reject', $(this).find('form').serialize(), function(data) {
+		container.slideUp(200).delay(200, function() {
+			container.remove();
+			$('#notice').removeClass('hidden').html('The negotiation process was canceled.');
+			$('.tooltip').addClass('hidden');
+			li.wrapInner('<div style="display: block;" />').find('div').slideUp(200).delay(200, function() {
+				li.remove();
+			})
+		});
+	});
 });
