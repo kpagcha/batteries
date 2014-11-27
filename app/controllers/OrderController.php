@@ -32,4 +32,48 @@ class OrderController extends \BaseController {
 			$record->save();
 		}
 	}
+
+	public function checkoutForm() {
+		$order = Order::find(Input::get('order-id'));
+
+		$view = View::make('orders.checkout_form')->with('order', $order)->render();
+
+		return Response::json([
+    		'view' => $view
+		]);
+	}
+
+	public function deliveryDate($address) {
+		
+		$origin = 'Grunwaldzka 69, Wrocław, Polska';
+
+		$url = "http://maps.googleapis.com/maps/api/directions/json?origin=" . $origin . "&destination=" . $address . "&sensor=false&language=en";
+
+		$json = json_decode(file_get_contents(str_replace(" ", "%20", $url)), true);
+
+		if ($json['status'] == 'OK') {
+			try {
+				$delivery_duration = intval($json['routes'][0]['legs'][0]['duration']['value']);
+
+				$distribution_time = 5*60*60;
+
+				$date = new DateTime();
+				$date_in_secs = strtotime($date->format('Y-m-d H:i:s'));
+				$new_date = $date_in_secs + $delivery_duration + $distribution_time;
+
+				$date = date('l d F H:i Y', $new_date);
+
+				// if (intval(date('H', $new_date)) > 21 || intval(date('H', $new_date)) < 8) {
+				//     $date->setTime(8, 0, 0);
+				//     $date->add(new DateInterval('P1D'));
+				// }
+
+				return Response::json([
+					'date' => $date
+				]);
+			} catch(Exception $e){
+				error_log($e->getMessage());
+			}
+		}
+	}
 }

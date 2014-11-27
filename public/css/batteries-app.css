@@ -212,3 +212,7 @@ li.list-group-item.list-group-item-info {
 #negotiation-buttons span {
 	font-size: 1.5em;
 }
+
+#find {
+	cursor: pointer;
+}

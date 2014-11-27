@@ -3,7 +3,7 @@
 class RecordController extends \BaseController {
 	public function index() {
 		$pages = 5;
-		$records = Record::paginate($pages);
+		$records = Record::orderBy('created_at', 'desc')->paginate($pages);
 
 		$view = View::make('records.index', compact('records'))->render();
 

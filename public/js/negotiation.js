@@ -157,7 +157,7 @@ $(document).on('click', '#accept-offer', function(event) {
 	var li = container.closest('li');
 	$.post('/negotiation/complete', $(this).find('form').serialize(), function(data) {
 		container.slideUp(200).delay(200, function() {
-			if (data['has_active_negotiations']) {
+			if (data['has_active_negotiations'] == false) {
 				container.closest('ul').next('div').find('a').removeClass('disabled');
 			}
 			container.remove();
@@ -176,6 +176,9 @@ $(document).on('click', '#reject-offer', function(event) {
 	var li = container.closest('li');
 	$.post('/negotiation/reject', $(this).find('form').serialize(), function(data) {
 		container.slideUp(200).delay(200, function() {
+			if (data['has_active_negotiations'] == false) {
+				container.closest('ul').next('div').find('a').removeClass('disabled');
+			}
 			container.remove();
 			$('#notice').removeClass('hidden').html('The negotiation process was canceled.');
 			$('.tooltip').addClass('hidden');

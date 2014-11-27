@@ -18,3 +18,33 @@ $(document).on('click', '#order', function(event) {
 		});
 	});
 });
+
+/* Start checkout process */
+$(document).on('click', '#start-checkout', function(event) {
+	$.get('/order/checkout_form', $(this).find('form').serialize(), function(data) {
+		$('#negotiations').html(data['view']);
+
+		var default_location = true;
+
+		/* Google maps */
+		$('input[name=shipping-address]').geocomplete({
+			map: '#map-canvas',
+			location: 'Wroclaw'
+		})
+		.bind("geocode:result", function(event, result){
+			address = $('input[name=shipping-address]').val();
+
+			if (!default_location) {
+				$.get('/order/delivery_date/' + address, function(data) {
+					$('#delivery-date').html(data['date']);
+				});
+			}
+
+			default_location = false;
+		});
+		$("#find").click(function(){
+			$("input[name=shipping-address]").trigger("geocode");
+		});
+
+	});
+});

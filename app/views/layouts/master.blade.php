@@ -15,6 +15,10 @@
 	{{ HTML::script('js/order.js') }}
 	{{ HTML::script('js/negotiation.js') }}
 	{{ HTML::script('js/records.js') }}
+
+	<script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+	{{ HTML::script('js/ubilabs-geocomplete-bd41fe3/jquery.geocomplete.js') }}
+
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 </head>
 <body>

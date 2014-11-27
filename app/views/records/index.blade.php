@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading text-center"><h4>History of negotiations</h4></div>
-	<div class="panel-body">
+	<div class="panel-body text-center">
 		<p>Here you can find the records for all negotiations.</p>
 		@if (count($records) == 0)
 			<hr>
@@ -49,6 +49,9 @@
 						</div>
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<strong>Date: </strong>{{ $record->created_at }}
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<strong>Order #{{ $record->order_id }} </strong>
 						</div>
 					</div>
 				</div>

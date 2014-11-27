@@ -15,7 +15,7 @@
 		<div role="tabpanel" class="tab-pane active" id="catalog">
 			<div class="panel panel-default">
 				<div class="panel-heading text-center"><h4>Batteries catalog</h4></div>
-				<div class="panel-body">
+				<div class="panel-body text-center">
 					<p>This is the catalog of <strong>Batteries App</strong>. We have everything you need!</p>
 					@if (count($batteries) == 0)
 						<hr>

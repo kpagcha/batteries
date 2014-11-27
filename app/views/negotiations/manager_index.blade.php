@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading text-center"><h4>Negotiations</h4></div>
-	<div class="panel-body">
+	<div class="panel-body text-center">
 		<p>This is your negotiations panel.</p>
 		<div class="text-center order-title">
 			<strong>Your current negotiations</strong>

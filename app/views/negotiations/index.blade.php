@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading text-center"><h4>Negotiations</h4></div>
-	<div class="panel-body">
+	<div class="panel-body text-center">
 		<p>This is your negotiations panel.</p>
 		@if (count($orders) == 0)
 			<hr>
@@ -62,8 +62,12 @@
 			</ul>
 			<?php $disabled = $active_negotiations > 0 ? "disabled" : ""; ?>
 			<div class="panel-footer text-center">
-				<a href="#checkout" class="btn btn-default {{ $disabled }} no-borders-button"><img src="images/sprites/checkout.png"></a>
+				<a id="start-checkout" href="#checkout" class="btn btn-default {{ $disabled }} no-borders-button"><img src="images/sprites/checkout.png">
+					{{ Form::open() }}
+						{{ Form::hidden('order-id', $order[$key]['order_id']) }}
+					{{ Form::close() }}
+				</a>
 			</div>
 		@endforeach
 	@endif
-</diV
+</div>

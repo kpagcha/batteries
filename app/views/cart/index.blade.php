@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading text-center"><h4>Shopping cart</h4></div>
-	<div class="panel-body">
+	<div class="panel-body text-center">
 		<p>This is your shopping cart.</p>
 		@if (count($cart_batteries) == 0)
 			<hr>

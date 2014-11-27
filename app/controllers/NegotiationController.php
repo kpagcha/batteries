@@ -152,7 +152,7 @@ class NegotiationController extends \BaseController {
 
 		$negotiation = Negotiation::find(Input::get('negotiation-id'));
 
-		if ($negotiation && $negotiation->hasStatus('in_process')) {
+		if ($negotiation && $negotiation->turn == Auth::user()->id && $negotiation->hasStatus('in_process')) {
 			$negotiation = Negotiation::find(Input::get('negotiation-id'));
 			$negotiation->setStatus('completed');
 			$negotiation->save();
@@ -169,12 +169,15 @@ class NegotiationController extends \BaseController {
 
 		$negotiation = Negotiation::find(Input::get('negotiation-id'));
 
-		if ($negotiation && $negotiation->hasStatus('in_process')) {
+		if ($negotiation && $negotiation->turn == Auth::user()->id && $negotiation->hasStatus('in_process')) {
 			$negotiation = Negotiation::find(Input::get('negotiation-id'));
 			$negotiation->setStatus('rejected');
 			$negotiation->save();
 
 			$this->saveRecord($negotiation);
+			return Response::json([
+				'has_active_negotiations' => Negotiation::customerCountActiveNegotiations($negotiation->order_id) > 0
+			]);
 		}
 	}
 
@@ -219,6 +222,7 @@ class NegotiationController extends \BaseController {
 		$record->customer_id = $negotiation->user_id;
 		$record->manager_id = $negotiation->manager_id;
 		$record->status_id = $negotiation->status_id;
+		$record->order_id = $negotiation->order_id;
 		$record->save();
 	}
 }

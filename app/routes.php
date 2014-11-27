@@ -33,6 +33,8 @@ Route::group(['before' => 'ajax'], function() {
 		Route::post('/cart/changeAmount', ['uses' => 'CartController@changeAmount']);
 
 		Route::get('/order/create', ['uses' => 'OrderController@create']);
+		Route::get('/order/checkout_form', ['uses' => 'OrderController@checkoutForm']);
+		Route::get('/order/delivery_date/{address}', ['uses' => 'OrderController@deliveryDate']);
 	});
 
 	Route::group(['before' => 'customer_or_account_manager'], function() {
