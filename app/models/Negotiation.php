@@ -27,7 +27,7 @@ class Negotiation extends Eloquent {
     }
 
     public function hasStatus($status) {
-        return $this->status == Status::where('name', '=', $status)->first()->name;
+        return Status::find($this->status_id)->name == Status::where('name', '=', $status)->first()->name;
     }
 
     private function getIdInArray($array, $term) {
@@ -130,5 +130,21 @@ class Negotiation extends Eloquent {
         } catch(Exception $e) {
             error_log($e->getMessage());
         }
+    }
+
+    public static function customerCountActiveNegotiations($order_id) {
+        $open = Status::where('name', '=', 'open')->first()->id;
+        $count = Negotiation::where('order_id', '=', $order_id)
+                            ->where('user_id', '=', Auth::user()->id)
+                            ->where('status_id', '=', $open)
+                            ->count();
+
+        $in_process = Status::where('name', '=', 'in_process')->first()->id;
+        $count += Negotiation::where('order_id', '=', $order_id)
+                            ->where('user_id', '=', Auth::user()->id)
+                            ->where('status_id', '=', $in_process)
+                            ->count();
+
+        return $count;
     }
 }

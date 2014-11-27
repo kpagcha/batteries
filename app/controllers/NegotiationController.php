@@ -12,7 +12,10 @@ class NegotiationController extends \BaseController {
 				foreach ($items as $item) {
 					$order_id = $item['order_id'];
 					if (isset($orders[$order_id])) array_push($orders[$order_id], $item);
-					else $orders[$order_id] = [ $order_id => $item ]; 
+					else $orders[$order_id] = [
+						$order_id => $item,
+						'active_negotiations' => Negotiation::customerCountActiveNegotiations($order_id)
+					];
 				}
 			}
 
@@ -111,7 +114,7 @@ class NegotiationController extends \BaseController {
 
 		$negotiation = Negotiation::find(Input::get('negotiation-id'));
 
-		if ($negotiation->turn == Auth::user()->id && $negotiation->hasStatus('in_process')) {
+		if ($negotiation && $negotiation->turn == Auth::user()->id && $negotiation->hasStatus('in_process')) {
 
 			$price = Input::get('price');
 
@@ -147,19 +150,26 @@ class NegotiationController extends \BaseController {
 	/* Completes negotiation successfully */
 	public function complete() {
 
-		if ($negotiation->hasStatus('in_process')) {
+		$negotiation = Negotiation::find(Input::get('negotiation-id'));
+
+		if ($negotiation && $negotiation->hasStatus('in_process')) {
 			$negotiation = Negotiation::find(Input::get('negotiation-id'));
 			$negotiation->setStatus('completed');
 			$negotiation->save();
 
 			$this->saveRecord($negotiation);
+			return Response::json([
+				'has_active_negotiations' => Negotiation::customerCountActiveNegotiations($negotiation->order_id) > 0
+			]);
 		}
 	}
 
 	/* Cancels an offer */
 	public function reject() {
 
-		if ($negotiation->hasStatus('in_process')) {
+		$negotiation = Negotiation::find(Input::get('negotiation-id'));
+
+		if ($negotiation && $negotiation->hasStatus('in_process')) {
 			$negotiation = Negotiation::find(Input::get('negotiation-id'));
 			$negotiation->setStatus('rejected');
 			$negotiation->save();

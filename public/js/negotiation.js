@@ -157,6 +157,9 @@ $(document).on('click', '#accept-offer', function(event) {
 	var li = container.closest('li');
 	$.post('/negotiation/complete', $(this).find('form').serialize(), function(data) {
 		container.slideUp(200).delay(200, function() {
+			if (data['has_active_negotiations']) {
+				container.closest('ul').next('div').find('a').removeClass('disabled');
+			}
 			container.remove();
 			$('.tooltip').addClass('hidden');
 			li.removeClass('list-group-item-primary').addClass('list-group-item-success');

@@ -9,6 +9,7 @@
 	</div>
 	@if (count($orders))
 		@foreach ($orders as $key => $order)
+			<?php $active_negotiations = $order['active_negotiations']; unset($order['active_negotiations']); ?>
 			<div class="text-center order-title">
 				<strong>Order #{{ $order[$key]['order_id'] }}</strong>
 			</div>
@@ -59,8 +60,9 @@
 					</li>
 				@endforeach
 			</ul>
+			<?php $disabled = $active_negotiations > 0 ? "disabled" : ""; ?>
 			<div class="panel-footer text-center">
-				<a href="#checkout" class="btn btn-default disabled no-borders-button"><img src="images/sprites/checkout.png"></a>
+				<a href="#checkout" class="btn btn-default {{ $disabled }} no-borders-button"><img src="images/sprites/checkout.png"></a>
 			</div>
 		@endforeach
 	@endif
