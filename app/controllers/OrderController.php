@@ -76,4 +76,35 @@ class OrderController extends \BaseController {
 			}
 		}
 	}
+
+	public function destroy($id) {
+		try{
+		$order = Order::find($id);
+
+		$negotiations = $order->negotiations;
+		foreach ($negotiations as $negotiation) {
+			$negotiation->setStatus('rejected');
+			$negotiation->save();
+			$this->saveRecord($negotiation);
+		}
+		
+		$order->delete();
+
+		$view = View::make('orders.delete')->render();
+
+		return Response::json(['view' => $view]);
+	}catch(Exception $e){error_log($e->getMessage());}
+	}
+
+	private function saveRecord($negotiation) {
+		$record = new Record;
+		$record->battery_id = $negotiation->battery_id;
+		$record->price = $negotiation->price;
+		$record->amount = $negotiation->amount;
+		$record->customer_id = $negotiation->user_id;
+		$record->manager_id = $negotiation->manager_id;
+		$record->status_id = $negotiation->status_id;
+		$record->order_id = $negotiation->order_id;
+		$record->save();
+	}
 }

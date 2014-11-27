@@ -39,12 +39,12 @@
 		</div>
 	</div>
 	<div class="panel-footer text-center">
-		<a id="finish-checkout" href="#finish-checkout" class="btn btn-default no-borders-button"><img src="images/sprites/checkout.png">
+		<a id="finish-checkout" href="#finish-checkout" class="btn btn-default no-borders-button" title="Complete check-out"><img src="images/sprites/checkout.png">
 			{{ Form::open() }}
 				{{ Form::hidden('order-id', $order->id) }}
 			{{ Form::close() }}
 		</a>
-		<a id="cancel-checkout" href="#canel-checkout" class="btn btn-default no-borders-button pull-right"><img src="images/sprites/cancel.png">
+		<a id="delete-order" href="#cancel-checkout" class="btn btn-default no-borders-button pull-right" title="Delete order"><img src="images/sprites/cancel.png">
 			{{ Form::open() }}
 				{{ Form::hidden('order-id', $order->id) }}
 			{{ Form::close() }}

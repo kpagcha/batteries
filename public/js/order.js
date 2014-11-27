@@ -48,3 +48,27 @@ $(document).on('click', '#start-checkout', function(event) {
 
 	});
 });
+
+/* Delete order */
+$(document).on('click', '#delete-order', function(event) {
+	event.preventDefault();
+	var id = $(this).find('input[name=order-id]').val();
+	$.ajax({
+		url: '/order/' + id,
+		type: 'delete',
+		data: $(this).find('form').serialize(),
+		context: this
+	})
+	.done(function(data) {
+		$('.tooltip').hide();
+		$('#negotiations').html(data['view']);
+	});
+});
+
+/* Bootstrap tooltip for finish checkout and delete order */
+$(document).on('mouseover', '#finish-checkout, #delete-order', function() {
+	$(this).tooltip({
+		placement: 'top',
+		container: 'body'
+	}).tooltip('show');
+});

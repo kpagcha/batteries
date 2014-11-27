@@ -35,6 +35,7 @@ Route::group(['before' => 'ajax'], function() {
 		Route::get('/order/create', ['uses' => 'OrderController@create']);
 		Route::get('/order/checkout_form', ['uses' => 'OrderController@checkoutForm']);
 		Route::get('/order/delivery_date/{address}', ['uses' => 'OrderController@deliveryDate']);
+		Route::delete('/order/{id}', ['uses' => 'OrderController@destroy']);
 	});
 
 	Route::group(['before' => 'customer_or_account_manager'], function() {
