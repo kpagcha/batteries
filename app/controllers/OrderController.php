@@ -61,12 +61,12 @@ class OrderController extends \BaseController {
 				$date_in_secs = strtotime($date->format('Y-m-d H:i:s'));
 				$new_date = $date_in_secs + $delivery_duration + $distribution_time;
 
-				$date = date('l d F H:i Y', $new_date);
+				if (intval(date('H', $new_date)) > 21 || intval(date('H', $new_date)) < 8) {
+				    $date->setTime(8, 0, 0);
+				    $date->add(new DateInterval('P1D'));
+				}
 
-				// if (intval(date('H', $new_date)) > 21 || intval(date('H', $new_date)) < 8) {
-				//     $date->setTime(8, 0, 0);
-				//     $date->add(new DateInterval('P1D'));
-				// }
+				$date = $date->format('l d F H:i Y');
 
 				return Response::json([
 					'date' => $date
