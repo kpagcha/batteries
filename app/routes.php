@@ -35,7 +35,8 @@ Route::group(['before' => 'ajax'], function() {
 		Route::get('/order/create', ['uses' => 'OrderController@create']);
 		Route::get('/order/checkout_form', ['uses' => 'OrderController@checkoutForm']);
 		Route::get('/order/delivery_date/{address}', ['uses' => 'OrderController@deliveryDate']);
-		Route::delete('/order/{id}', ['uses' => 'OrderController@destroy']);
+		Route::get('/order/complete/', ['uses' => 'OrderController@complete']);
+		Route::delete('/order/{id}', ['uses' => 'OrderController@delete']);
 	});
 
 	Route::group(['before' => 'customer_or_account_manager'], function() {
@@ -43,7 +44,6 @@ Route::group(['before' => 'ajax'], function() {
 		Route::get('/negotiation/negotiation_form', ['uses' => 'NegotiationController@negotiationForm']);
 		Route::get('/negotiation/counter_offer', ['uses' => 'NegotiationController@counterOfferForm']);
 		Route::post('/negotiation/counter_offer', ['uses' => 'NegotiationController@counterOffer']);
-		Route::post('/negotiation/complete', ['uses' => 'NegotiationController@complete']);
 		Route::post('/negotiation/reject', ['uses' => 'NegotiationController@reject']);
 	});
 

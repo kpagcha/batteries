@@ -38,6 +38,8 @@ $(document).on('click', '#start-checkout', function(event) {
 				$.get('/order/delivery_date/' + address, function(data) {
 					$('#delivery-date').html(data['date']);
 				});
+			} else {
+				$('input[name=shipping-address]').val('');
 			}
 
 			default_location = false;
@@ -45,7 +47,22 @@ $(document).on('click', '#start-checkout', function(event) {
 		$("#find").click(function(){
 			$("input[name=shipping-address]").trigger("geocode");
 		});
+	});
+});
 
+/* Complete order */
+$(document).on('click', '#finish-checkout', function(event) {
+	event.preventDefault();
+	$(this).find('form').find('input[name=delivery-date]').val($('#delivery-date').html());
+	$(this).find('form').find('input[name=shipping-address]').val($('#shipping-address').val());
+	$.get('/order/complete', $(this).find('form').serialize(), function(data) {
+		if (data['error']) {
+	        $("html, body").animate({ scrollTop: 0 }, "fast");
+			$('input[name=shipping-address]').parent().parent().addClass('has-warning');
+		} else {
+			$('.tooltip').hide();
+			$('#negotiations').html(data['view']);
+		}
 	});
 });
 

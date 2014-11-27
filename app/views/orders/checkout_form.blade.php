@@ -42,6 +42,8 @@
 		<a id="finish-checkout" href="#finish-checkout" class="btn btn-default no-borders-button" title="Complete check-out"><img src="images/sprites/checkout.png">
 			{{ Form::open() }}
 				{{ Form::hidden('order-id', $order->id) }}
+				{{ Form::hidden('shipping-address', null) }}
+				{{ Form::hidden('delivery-date', null) }}
 			{{ Form::close() }}
 		</a>
 		<a id="delete-order" href="#cancel-checkout" class="btn btn-default no-borders-button pull-right" title="Delete order"><img src="images/sprites/cancel.png">

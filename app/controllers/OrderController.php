@@ -34,6 +34,7 @@ class OrderController extends \BaseController {
 	}
 
 	public function checkoutForm() {
+		
 		$order = Order::find(Input::get('order-id'));
 
 		$view = View::make('orders.checkout_form')->with('order', $order)->render();
@@ -77,8 +78,28 @@ class OrderController extends \BaseController {
 		}
 	}
 
+	public function complete() {
+
+		$order = Order::find(Input::get('order-id'));
+		$address = Input::get('shipping-address');
+		$delivery_date = Input::get('delivery-date');
+
+		if ($delivery_date == '?') {
+			return Response::json(['error' => true]);
+		}
+
+		$order->delivery_address = $address;
+		$order->delivery_date = $delivery_date;
+		$order->setStatus('completed');
+		$order->save();
+
+		$view = View::make('orders.complete', compact('order'))->render();
+
+		return Response::json(['view' => $view]);
+	}
+
 	public function destroy($id) {
-		try{
+
 		$order = Order::find($id);
 
 		$negotiations = $order->negotiations;
@@ -93,7 +114,6 @@ class OrderController extends \BaseController {
 		$view = View::make('orders.delete')->render();
 
 		return Response::json(['view' => $view]);
-	}catch(Exception $e){error_log($e->getMessage());}
 	}
 
 	private function saveRecord($negotiation) {
