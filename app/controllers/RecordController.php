@@ -6,6 +6,7 @@ class RecordController extends \BaseController {
 		$records = Record::orderBy('created_at', 'desc')->paginate($pages);
 
 		$view = View::make('records.index', compact('records'))->render();
+		error_log($view);
 
 		return Response::json([
 			'view' => $view
