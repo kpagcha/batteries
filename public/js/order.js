@@ -23,29 +23,36 @@ $(document).on('click', '#order', function(event) {
 $(document).on('click', '#start-checkout', function(event) {
 	$.get('/order/checkout_form', $(this).find('form').serialize(), function(data) {
 		$('#negotiations').html(data['view']);
+		$('#notice').addClass('hidden');
 
 		var default_location = true;
 
 		/* Google maps */
-		$('input[name=shipping-address]').geocomplete({
+		$('#geocomplete').geocomplete({
 			map: '#map-canvas',
 			location: 'Wroclaw'
 		})
 		.bind("geocode:result", function(event, result){
-			address = $('input[name=shipping-address]').val();
+			address = result.formatted_address;
 
 			if (!default_location) {
 				$.get('/order/delivery_date/' + address, function(data) {
-					$('#delivery-date').html(data['date']);
+					if (!data['error']) {
+						$('#delivery-date').html(data['date']);
+						$('#address-error').addClass('hidden');
+					} else {
+						$('#address-error').removeClass('hidden').html(data['error']);
+						$('#delivery-date').html('?');
+						$('#finish-checkout input[name=shipping-address]').val('');
+					}
 				});
 			} else {
-				$('input[name=shipping-address]').val('');
+				$('#finish-checkout input[name=shipping-address]').val('');
+				default_location = false;
 			}
-
-			default_location = false;
 		});
-		$("#find").click(function(){
-			$("input[name=shipping-address]").trigger("geocode");
+		$("#find").click(function() {
+			$("#geocomplete").trigger("geocode");
 		});
 	});
 });
@@ -88,4 +95,21 @@ $(document).on('mouseover', '#finish-checkout, #delete-order', function() {
 		placement: 'top',
 		container: 'body'
 	}).tooltip('show');
+});
+
+/* Show battery */
+$(document).on('click', 'a[name=show-order-battery]', function(event) {
+	event.preventDefault();
+	var id = $(this).parent().find("input[name='battery-id']").val();
+	var parent = $(this).parent();
+	if (parent.find('div#show').length) {
+		parent.find('div#show').slideUp('200',function() {
+			parent.find('div#show').remove();
+		});
+	} else {
+		$.get('/order/battery/' + id, function(data) {
+			parent.append(data['view']);
+			parent.find('div#show').hide().slideDown('400');
+		});
+	}
 });

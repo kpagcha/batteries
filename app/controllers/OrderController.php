@@ -55,12 +55,15 @@ class OrderController extends \BaseController {
 		if ($json['status'] == 'OK') {
 			try {
 				$delivery_duration = intval($json['routes'][0]['legs'][0]['duration']['value']);
+				$days = floor($delivery_duration/(24*60*60));
 
 				$distribution_time = 5*60*60;
 
 				$date = new DateTime();
 				$date_in_secs = strtotime($date->format('Y-m-d H:i:s'));
-				$new_date = $date_in_secs + $delivery_duration + $distribution_time;
+				$new_date = $date_in_secs + $delivery_duration + $distribution_time + $days*11*60*60;
+
+				$date = new DateTime(date('Y-m-d H:i:s', $new_date));
 
 				if (intval(date('H', $new_date)) > 21 || intval(date('H', $new_date)) < 8) {
 				    $date->setTime(8, 0, 0);
@@ -75,10 +78,14 @@ class OrderController extends \BaseController {
 			} catch(Exception $e){
 				error_log($e->getMessage());
 			}
+		} else {
+			return Response::json([
+				'error' => 'Invalid destination'
+			]);
 		}
 	}
 
-	public function complete() {
+	public function complete() {try{
 
 		$order = Order::find(Input::get('order-id'));
 		$address = Input::get('shipping-address');
@@ -96,6 +103,7 @@ class OrderController extends \BaseController {
 		$view = View::make('orders.complete', compact('order'))->render();
 
 		return Response::json(['view' => $view]);
+	}catch(Exception $e) { error_log($e->getMessage()); }
 	}
 
 	public function destroy($id) {
@@ -114,6 +122,18 @@ class OrderController extends \BaseController {
 		$view = View::make('orders.delete')->render();
 
 		return Response::json(['view' => $view]);
+	}
+
+	public function show($id) {
+		try{
+		$battery = Battery::find($id);
+
+		$view = View::make('orders.show_battery', compact('battery'))->render();
+
+		return Response::json([
+			'view' => $view
+		]);
+	}catch(Exception $e) { error_log($e->getMessage()); }
 	}
 
 	private function saveRecord($negotiation) {

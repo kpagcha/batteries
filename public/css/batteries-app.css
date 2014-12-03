@@ -216,3 +216,7 @@ li.list-group-item.list-group-item-info {
 #find {
 	cursor: pointer;
 }
+
+#order-summary-list a {
+	color: #000;
+}

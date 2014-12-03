@@ -56,4 +56,15 @@ class Order extends Eloquent {
         }
         $this->status_id = $assigned_status;
     }
+
+    public function completedNegotiations() {
+        $completed = Status::where('name', '=', 'completed')->first()->id;
+        $negotiations = $this->negotiations;
+        foreach ($negotiations as $key => $value) {
+            if ($value->status_id != $completed) {
+                unset($negotiations[$key]);
+            }
+        }
+        return $negotiations;
+    }
 }

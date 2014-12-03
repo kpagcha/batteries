@@ -41,10 +41,10 @@
 						<div class="col-md-2 col-sm-2 col-xs-2">
 							<div class="pull-right"><small>{{ $status }}</small></div>
 						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="col-md-6 col-sm-6 col-xs-12">
 							<strong>Customer: </strong><span>{{ $record->customer->email }}</span>
 						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="col-md-6 col-sm-6 col-xs-12">
 							<strong>Manager: </strong><span>{{ $record->manager ? $record->manager->email : 'none' }}</span>
 						</div>
 						<div class="col-md-12 col-sm-12 col-xs-12">

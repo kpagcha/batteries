@@ -13,13 +13,14 @@
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							{{ Form::label('shipping-address', 'Shipping address', ['class' => 'control-label']) }}
 						</div>
-						<div class="col-md-8 col-sm-8 col-xs-8">
+						<div class="col-md-8 col-sm-8 col-xs-12">
 							<div class="input-group">
-								{{ Form::text('shipping-address', null, ['class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Where do you want your order to be delivered?']) }}
+								{{ Form::text('shipping-address', null, ['id' => 'geocomplete', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Where do you want your order to be delivered?']) }}
 								<span id="find" class="input-group-addon"><span class="glyphicon glyphicon-ok succeed"></span></span>
 							</div>
 						</div>
 					</div>
+					<div id="address-error" class="col-md-12 alert alert-danger hidden text-center"></div>
 				</div>
 
 				<div class="col-md-12 col-sm-12 col-xs-12 extra-padding">
