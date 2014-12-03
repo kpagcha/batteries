@@ -85,7 +85,7 @@ class OrderController extends \BaseController {
 		}
 	}
 
-	public function complete() {try{
+	public function complete() {
 
 		$order = Order::find(Input::get('order-id'));
 		$address = Input::get('shipping-address');
@@ -103,7 +103,6 @@ class OrderController extends \BaseController {
 		$view = View::make('orders.complete', compact('order'))->render();
 
 		return Response::json(['view' => $view]);
-	}catch(Exception $e) { error_log($e->getMessage()); }
 	}
 
 	public function destroy($id) {
@@ -124,8 +123,7 @@ class OrderController extends \BaseController {
 		return Response::json(['view' => $view]);
 	}
 
-	public function show($id) {
-		try{
+	public function showBattery($id) {
 		$battery = Battery::find($id);
 
 		$view = View::make('orders.show_battery', compact('battery'))->render();
@@ -133,7 +131,6 @@ class OrderController extends \BaseController {
 		return Response::json([
 			'view' => $view
 		]);
-	}catch(Exception $e) { error_log($e->getMessage()); }
 	}
 
 	private function saveRecord($negotiation) {

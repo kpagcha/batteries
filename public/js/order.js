@@ -40,6 +40,7 @@ $(document).on('click', '#start-checkout', function(event) {
 					if (!data['error']) {
 						$('#delivery-date').html(data['date']);
 						$('#address-error').addClass('hidden');
+						$('#geocode').val(address);
 					} else {
 						$('#address-error').removeClass('hidden').html(data['error']);
 						$('#delivery-date').html('?');
@@ -61,7 +62,7 @@ $(document).on('click', '#start-checkout', function(event) {
 $(document).on('click', '#finish-checkout', function(event) {
 	event.preventDefault();
 	$(this).find('form').find('input[name=delivery-date]').val($('#delivery-date').html());
-	$(this).find('form').find('input[name=shipping-address]').val($('#shipping-address').val());
+	$(this).find('form').find('input[name=shipping-address]').val($('#geocomplete').val());
 	$.get('/order/complete', $(this).find('form').serialize(), function(data) {
 		if (data['error']) {
 	        $("html, body").animate({ scrollTop: 0 }, "fast");

@@ -19,7 +19,7 @@
 						<span name="amount">
 							({{ $negotiation->amount }})
 						</span>
-						<a name="show-order-battery" href="/battery/{{ $negotiation->battery->id }}">
+						<a name="show-order-battery" href="/order/battery/{{ $negotiation->battery->id }}">
 							{{ $negotiation->battery->name }} ({{ $negotiation->battery->category }}), {{ $negotiation->battery->voltage }} volts
 							@if ($negotiation->battery->technology != "")
 								&#8212; {{ $negotiation->battery->technology }}

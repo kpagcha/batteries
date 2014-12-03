@@ -19,6 +19,21 @@ class NegotiationController extends \BaseController {
 				}
 			}
 
+			error_log(json_encode($orders,JSON_PRETTY_PRINT));
+
+			foreach ($orders as $key => $order) {
+				$id = null;
+				foreach ($order as $k => $value) {
+					$id = $value['order_id'];
+					break;
+				}
+				$status_id = Order::find($id)->status_id;
+				$completed = Status::where('name', '=', 'completed')->first()->id;
+				if ($order['active_negotiations'] == 0 && $status_id == $completed) {
+					unset($orders[$key]);
+				}
+			}
+
 			$view = View::make('negotiations.index', compact('orders'))->render();
 			
 			return Response::json([

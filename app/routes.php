@@ -36,7 +36,7 @@ Route::group(['before' => 'ajax'], function() {
 		Route::get('/order/checkout_form', ['uses' => 'OrderController@checkoutForm']);
 		Route::get('/order/delivery_date/{address}', ['uses' => 'OrderController@deliveryDate']);
 		Route::get('/order/complete/', ['uses' => 'OrderController@complete']);
-		Route::delete('/order/{id}', ['uses' => 'OrderController@delete']);
+		Route::delete('/order/{id}', ['uses' => 'OrderController@destroy']);
 		Route::get('/order/battery/{id}', ['uses' => 'OrderController@showBattery']);
 	});
 
