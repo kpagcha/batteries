@@ -19,8 +19,6 @@ class NegotiationController extends \BaseController {
 				}
 			}
 
-			error_log(json_encode($orders,JSON_PRETTY_PRINT));
-
 			foreach ($orders as $key => $order) {
 				$id = null;
 				foreach ($order as $k => $value) {

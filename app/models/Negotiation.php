@@ -113,7 +113,9 @@ class Negotiation extends Eloquent {
     public static function getActiveNegotiatingItems() {
         try {
             $in_process = Status::where('name', '=', 'in_process')->first()->id;
-            $items = Negotiation::where('status_id', '=', $in_process)->get();
+            $items = Negotiation::where('status_id', '=', $in_process)
+                                    ->where('manager_id', '=', Auth::user()->id)
+                                    ->get();
 
             $batteries = [];
             foreach ($items as $item) {

@@ -1,6 +1,7 @@
 body {
   font-family: "Ubuntu", sans-serif;
-  background-image: url("/images/batteries.jpg");
+  background: url("/images/batteries.jpg") top right no-repeat;
+  background-attachment: fixed;
   color: #000;
   margin-bottom: 30px; }
 
@@ -163,5 +164,7 @@ li.list-group-item.list-group-item-info {
 
 #order-summary-list a {
   color: #000; }
+
+/*# sourceMappingURL=batteries-app.css.map */
 
 /*# sourceMappingURL=batteries-app.css.map */
