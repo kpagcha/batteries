@@ -24,7 +24,7 @@ class BatteryController extends \BaseController {
 			'capacity' => 'integer',
 			'height' => 'numeric|min:0',
 			'diameter' => 'numeric|min:0',
-			'price' => 'numeric|min:0'
+			'price' => 'required|numeric|min:0'
 		]);
 
 		$data = [
