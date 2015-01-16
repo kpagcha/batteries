@@ -1,5 +1,5 @@
 <div class="col-md-6 col-md-offset-2" role="tabpanel">
-	<ul id="main-tabs" class="nav nav-tabs col-md-offset-4 col-xs-offset-3" role="tablist">
+	<ul id="main-tabs" class="nav nav-tabs col-md-offset-4 col-xs-offset-2" role="tablist">
 	    <li role="presentation" class="active" data-toggle="tooltip" data-placement="top" title="Catalog"><a id="catalog-tab" href="#catalog" aria-controls="catalog" role="tab" data-toggle="tab"><img src="/images/sprites/battery.png"></a></li>
 	    @if (Auth::check() && Auth::user()->hasRole('customer'))
 	    	<li id="shopping-cart-tab" role="presentation" data-toggle="tooltip" data-placement="top" title="Shopping cart"><a href="#shopping-cart"><img src="/images/sprites/shopping-cart-empty.png"></a></li>

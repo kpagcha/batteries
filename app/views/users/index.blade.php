@@ -6,7 +6,7 @@
 <div id="manage-users-container" class="col-md-12 col-xs-12 container-fluid container-default">
 	<div style="padding:2em">
 		<div id="success" class="col-md-4 col-md-offset-4 col-xs-12 text-center alert alert-success hidden"></div>
-		<div class="col-md-6 col-md-offset-5 col-xs-6 col-xs-offset-3">
+		<div class="col-md-6 col-md-offset-5 col-xs-6 col-xs-offset-2">
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#create-new-user">Create new user</button>
 		</div>	
 	</div>

@@ -7,7 +7,7 @@
 	</p>
 	<div id="negotiation-buttons" class="btn-group">
 		<?php $disabled = ($negotiation->turn != Auth::user()->id) ? "disabled" : ""; ?>
-		<div class="col-md-8 col-xs-8">
+		<div class="col-md-8 col-xs-6">
 			<button id="accept-offer" type="button" class="btn btn-default no-borders-button succeed {{ $disabled }}">
 				{{ Form::open() }}
 					{{ Form::hidden('negotiation-id', $negotiation->id) }}
